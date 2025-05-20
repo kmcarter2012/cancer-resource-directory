@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Add your CSS rules from the first example here or ensure they are in style.css */
-        root {
+        :root {
             --primary-color: #3a86ff;
             --secondary-color: #ff006e;
             --accent-color: #8338ec;
@@ -672,12 +672,22 @@
 <body>
     <div id="top"></div>
 
-    <header>
-        <div class="hero-section" style="background-image: url('hero.png');">
-            <h1>Community Resource Directory for Cancer Patients</h1>
-            <p>Connecting You with Nationwide Support Services</p>
-        </div>
- <h2 class="text-center" style="margin-top: 0.5rem; margin-bottom: 0.5rem; color: var(--dark-color);">Cancer Resource Directory</h2>
+  
+        <header>
+            <div class="hero-section" style="background-image: url('hero.png');">
+                <h1>Community Resource Directory for Cancer Patients</h1>
+                <p>Connecting You with Nationwide Support Services</p>
+            </div>
+        
+            <h2 class="text-center" style="margin-top: 0.5rem; margin-bottom: 0.5rem; color: var(--dark-color);">Cancer Resource Directory</h2>
+        
+            <nav>
+                <ul class="main-navbar">
+
+                </ul>
+            </nav>
+        </header>
+
         <nav>
             <ul class="main-navbar">
                 <li class="dropdown">
@@ -728,7 +738,16 @@
             </div>
             <div id="searchResults"></div>
         </div>
+        <div id="top"></div>
 
+        <header>
+          <div class="hero-section" style="background-image: url('hero.png');">
+            <h1>Community Resource Directory for Cancer Patients</h1>
+            <p>Connecting You with Nationwide Support Services</p>
+          </div>
+       
+         
+          <h2 class="text-center" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Cancer Resource Directory</h2>
         <div class="two-column-layout">
             <div class="quick-nav">
                 <h3>Quick Navigation</h3>
@@ -760,15 +779,10 @@
                     <h2>National Resources</h2>
                     <p>Explore a variety of national programs and services available across the United States.</p>
 
-                   <h3 id="healthcare">Healthcare & Medication Assistance</h3>
+                    <h3 id="healthcare">Healthcare & Medication Assistance</h3>
                     <ul>
-                        <li><a href="https://www.healthcare.gov/"><strong> HealthCare.gov:</strong></a> The federal government’s health insurance marketplace offering access to affordable healthcare coverage and enrollment information.</li>
+                        <li><a href="https://www.healthcare.gov/"><strong>HealthCare.gov:</strong></a> The federal government’s health insurance marketplace offering access to affordable healthcare coverage and enrollment information.</li>
                         <li><a href="https://findahealthcenter.hrsa.gov/"><strong>HRSA Health Center Finder:</strong></a> Locate federally funded health centers offering low-cost or free medical, dental, and mental health care based on income and need.</li>
-                        <li><a href="https://www.cancercare.org" target="_blank"><strong>CancerCare:</strong></a> Offers financial assistance, support groups, and resources for cancer patients and caregivers.</li>
-                        <li><a href="https://www.needymeds.org" target="_blank"><strong>NeedyMeds:</strong></a> Provides information on programs that help with the cost of medications and healthcare.</li>
-                        <li><a href="https://www.rxassist.org" target="_blank"><strong>RxAssist:</strong></a> A directory of patient assistance programs for affordable medications.</li>
-                        <li><a href="https://www.goodrx.com" target="_blank"><strong>GoodRx:</strong></a> Helps individuals find discounts and pricing for prescription medications.</li>
-                        <li><a href="https://www.togetherrxaccess.com" target="_blank"><strong>TogetherRxAccess:</strong></a> Offers discounts on prescription medications for qualifying individuals.</li>
                     </ul>
 
                     <h3 id="seniors">Senior & Disability Services</h3>
@@ -1314,7 +1328,7 @@
             </div>
         </div>
         <div class="copyright">
-            &copy; 2025 Community Resource Directory. All rights reserved.
+            &copy; 2023 Community Resource Directory. All rights reserved.
         </div>
     </footer>
 
