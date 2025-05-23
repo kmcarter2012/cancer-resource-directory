@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Resource Directory for Cancer Patients</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Root variables for consistent theming */
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #ff006e;
+            --accent-color: #8338ec;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #38b000;
+            --warning-color: #ffbe0b;
+            --danger-color: #dc3545;
+            --blue-gradient: linear-gradient(135deg, #0077b6, #0096c7);
+            --purple-gradient: linear-gradient(135deg, #8338ec, #3a0ca3);
+        }
+
+        /* Universal Box-Sizing */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body and Typography */
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f8f9fa;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        /* Hero Section Styling (Now a clean gradient without integrated search) */
+        .hero-section {
+            background: var(--blue-gradient);
+            color: white;
+            padding: 4rem 2rem; /* Adjusted padding for a cleaner look without search */
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px; /* Ensure sufficient height */
+            border-radius: 0 0 10px 10px; /* Rounded bottom corners for hero */
+        }
+
+        .hero-title {
+            font-size: 2.5rem; /* Reverted to original larger size for main title */
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem; /* Reverted to original larger size for subtitle */
+            max-width: 800px;
+            margin: 0.5rem auto 0;
+        }
+
+        /* Re-adding the pointed bottom shape for the hero */
+        .hero-section::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: -10px; /* Adjust based on the desired overlap */
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: white; /* This needs to be white to blend with the nav */
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            z-index: 999; /* Ensure it's above other elements if necessary */
+        }
+
+        /* Removed hero-search-container specific styles */
+        /* .hero-search-container { ... } */
+        /* .hero-search-container input { ... } */
+        /* .hero-search-container button { ... } */
+
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-top: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .site-title {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            margin-bottom: 1rem;
+            padding-left: 0; /* Remove default padding for lists */
+            list-style: none; /* Remove default bullet points */
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* Header and Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-radius: 0 0 8px 8px; /* Rounded bottom corners for sticky nav */
+        }
+
+        .main-navbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .main-navbar li {
+            margin: 0;
+        }
+
+        .main-navbar a, .dropbtn {
+            display: block;
+            color: var(--dark-color);
+            text-align: center;
+            padding: 1rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 8px; /* Rounded corners for nav items */
+        }
+
+        .main-navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            border-radius: 8px; /* Rounded corners for dropdown */
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            padding: 0.75rem 1rem;
+            display: block;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .resource-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .resource-section > p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Directory Listing Item Styling */
+        .directory-listing-item {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: block; /* Ensure list items are block-level for proper layout */
+        }
+
+        .directory-listing-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .listing-title {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .listing-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .listing-title a:hover {
+            text-decoration: underline;
+        }
+
+        .listing-description {
+            margin-bottom: 0;
+            font-size: 1rem;
+            color: var(--dark-color);
+        }
+
+        /* Search Box (now the only search bar) */
+        .search-container {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .search-container h2 {
+            margin-top: 0;
+            text-align: center;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .search-box {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 1rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #dee2e6;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-box button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 44px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background-color: var(--accent-color);
+        }
+
+        #searchResults {
+            margin-top: 1.5rem;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* Quick Navigation Menu */
+        .quick-nav {
+            position: sticky;
+            top: 70px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+
+        .quick-nav h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .quick-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quick-nav ul li {
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 0.5rem;
+        }
+
+        .quick-nav ul li:last-child {
+            border-bottom: none;
+        }
+
+        .quick-nav ul li a {
+            display: block;
+            color: var(--dark-color);
+            transition: color 0.3s ease;
+        }
+
+        .quick-nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Two-Column Layout for Desktop */
+        @media (min-width: 992px) {
+            .two-column-layout {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+            border-radius: 10px 10px 0 0; /* Rounded top corners for footer */
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #adb5bd;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            background-color: #495057;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--accent-color);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-navbar {
+                flex-direction: column;
+            }
+
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+            }
+
+            .resource-section {
+                padding: 1.5rem;
+            }
+
+            .hero-section {
+                padding: 3rem 1rem;
+                min-height: 220px; /* Adjusted for smaller screens */
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-nav {
+                position: static;
+                max-height: none;
+                overflow-y: visible;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-box input, .search-box button {
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            .search-box button {
+                margin-top: 0.5rem;
+            }
+
+            .hero-section {
+                padding: 2rem 1rem;
+                min-height: 180px; /* Further adjusted for very small screens */
+            }
+
+            .resource-section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="top"></div>
+
+    <header>
+        <div class="hero-section">
+            <h1 class="hero-title">Community Resource Directory</h1>
+            <p class="hero-subtitle">Connecting Cancer Patients to Vital Community Resources</p>
+        </div>
+
+        <nav>
+            <ul class="main-navbar">
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">National Resources</a>
+                    <div class="dropdown-content">
+                        <a href="#healthcare">Healthcare & Medication Assistance</a>
+                        <a href="#seniors">Senior & Disability Services</a>
+                        <a href="#food">Food Assistance Resources</a>
+                        <a href="#nutrition">Nutrition Resources</a>
+                        <a href="#financial">Financial & Connectivity Assistance</a>
+                        <a href="#housing">Housing Resources</a>
+                        <a href="#directories">Directories & General Support</a>
+                        <a href="#crisis">Crisis & Mental Health Services</a>
+                    </div>
+                </li>
+
+                <li><a href="#cancer-resources">Cancer Resources</a></li>
+                <li><a href="#dental-assistance">Dental Care Resources</a></li>
+                <li><a href="#mental-health">Mental Health & Substance Abuse</a></li>
+                <li><a href="#ostomy-resources">Ostomy Supplies & Support</a></li>
+                <li><a href="#medical-supplies">Medical Supplies & Equipment</a></li>
+                <li><a href="#wig-resources">Wigs & Headcoverings</a></li>
+                <li><a href="#insurance-assistance">Insurance & Health Coverage</a></li>
+                <li><a href="#tech-resources">Phone, Internet, & Technology</a></li>
+                <li><a href="#support-chats">Support Group Chats</a></li>
+                <li><a href="#bereavement-support">Bereavement & Grief Support</a></li>
+                <li><a href="#vision-resources">Vision Resources</a></li> <li class="dropdown">
+                    <button class="dropbtn">States</button>
+                    <div class="dropdown-content">
+                        <a href="Illinois.html">Illinois</a>
+                        <a href="rhodeisland.html">Rhode Island</a>
+                        <a href="connecticut.html">Connecticut</a>
+                        <a href="louisiana.html">Louisiana</a>
+                        <a href="Michigan.html">Michigan</a>
+                        <a href="Texas.html">Texas</a>
+                        <a href="penn.html">Pennsylvania</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <h2>Find Resources</h2>
+            <div class="search-box">
+                <input type="text" id="siteSearch" placeholder="Search for resources...">
+                <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+            </div>
+            <div id="searchResults"></div>
+        </div>
+
+        <div class="two-column-layout">
+            <div class="quick-nav">
+                <h3>Quick Navigation</h3>
+                <ul>
+                    <li><a href="#healthcare">Healthcare & Medication</a></li>
+                    <li><a href="#nutrition">Nutrition Resources</a></li>
+                    <li><a href="#financial">Financial Assistance</a></li>
+                    <li><a href="#food">Food Assistance</a></li>
+                    <li><a href="#housing">Housing Resources</a></li>
+                    <li><a href="#dental-assistance">Dental Care</a></li>
+                    <li><a href="#mental-health">Mental Health</a></li>
+                    <li><a href="#cancer-resources">Cancer Resources</a></li>
+                    <li><a href="#breast-cancer">Breast Cancer</a></li>
+                    <li><a href="#lung-cancer">Lung Cancer</a></li>
+                    <li><a href="#colorectal-cancer">Colorectal Cancer</a></li>
+                    <li><a href="#prostate-cancer">Prostate Cancer</a></li>
+                    <li><a href="#ostomy-resources">Ostomy Resources</a></li>
+                    <li><a href="#medical-supplies">Medical Supplies</a></li>
+                    <li><a href="#wig-resources">Wigs & Headcoverings</a></li>
+                    <li><a href="#insurance-assistance">Insurance Help</a></li>
+                    <li><a href="#tech-resources">Phone, Internet, & Technology</a></li>
+                    <li><a href="#support-chats">Support Group Chats</a></li>
+                    <li><a href="#bereavement-support">Bereavement & Grief Support</a></li>
+                    <li><a href="#vision-resources">Vision Resources</a></li> </ul>
+            </div>
+
+            <div class="main-content">
+                <section id="national-resources" class="resource-section">
+                    <h2>National Resources</h2>
+                    <p>Explore a variety of national programs and services available across the United States.</p>
+
+                    <h3 id="healthcare">Healthcare & Medication Assistance</h3>
+                    <ul>
+                        <li><a href="https://www.healthcare.gov/"><strong>HealthCare.gov:</strong></a> The federal government's health insurance marketplace offering access to affordable healthcare coverage and enrollment information.</li>
+                        <li><a href="https://findahealthcenter.hrsa.gov/"><strong>HRSA Health Center Finder:</strong></a> Locate federally funded health centers offering low-cost or free medical, dental, and mental health care based on income and need.</li>
+                        <li><a href="https://www.cancercare.org" target="_blank"><strong>CancerCare:</strong></a> Offers financial assistance, support groups, and resources for cancer patients and caregivers.</li>
+                        <li><a href="https://www.needymeds.org" target="_blank"><strong>NeedyMeds:</strong></a> Provides information on programs that help with the cost of medications and healthcare.</li>
+                        <li><a href="https://www.rxassist.org" target="_blank"><strong>RxAssist:</strong></a> A directory of patient assistance programs for affordable medications.</li>
+                        <li><a href="https://www.goodrx.com" target="_blank"><strong>GoodRx:</strong></a> Helps individuals find discounts and pricing for prescription medications.</li>
+                        <li><a href="https://www.togetherrxaccess.com" target="_blank"><strong>TogetherRxAccess:</strong></a> Offers discounts on prescription medications for qualifying individuals.</li>
+                        <li><a href="https://www.singlecare.com/" target="_blank"><strong>SingleCare:</strong></a> Provides discounts and coupons to reduce the cost of prescriptions at participating pharmacies.</li>
+                        <li><a href="https://www.ssa.gov/medicare/part-d-extra-help" target="_blank"><strong>Medicare Extra Help (Low-Income Subsidy):</strong></a> Assists eligible Medicare beneficiaries with limited income and resources in paying prescription drug costs.</li>
+                        <li><a href="https://costplusdrugs.com" target="_blank"><strong>Mark Cuban Cost Plus Drug Company:</strong></a> Offers generic medications at significantly reduced prices by eliminating pharmacy benefit managers and middlemen.</li>
+                        <li><a href="https://www.needymeds.org/free-clinics-branch" target="_blank"><strong>NeedyMeds Free Clinic Finder:</strong></a> Database of free, low-cost, and sliding scale clinics searchable by location.</li>
+                        <li><a href="https://340bopais.hrsa.gov/coveredentitysearch" target="_blank"><strong>340B OPAIS Covered Entity Search:</strong></a> Locate healthcare facilities that participate in the 340B Drug Pricing Program, providing medications at significantly reduced prices.</li>
+                        <li><a href="https://www.medicare.gov/care-compare/" target="_blank"><strong>Medicare Care Compare:</strong></a> Find and compare healthcare providers, home health agencies, hospitals, and nursing homes based on quality ratings.</li>
+                        <li><a href="https://www.ncsl.org/health/state-pharmaceutical-assistance-programs" target="_blank"><strong>State Pharmaceutical Assistance Programs:</strong></a> State-run programs that help eligible residents with prescription drug costs.</li>
+                        <li><a href="https://www.medicaid.gov/about-us/contact-us" target="_blank"><strong>Medicaid Contact Information:</strong></a> Resources for contacting Medicaid about healthcare coverage and benefits.</li>
+                        <li><a href="https://www.ssa.gov/agency/contact/phone.html" target="_blank"><strong>Social Security Administration Contact:</strong></a> Contact information for Social Security programs including disability.</li>
+                        <li><a href="https://www.usa.gov/social-security-disability" target="_blank"><strong>USA.gov Social Security Disability:</strong></a> Information about applying for and receiving Social Security disability benefits.</li>
+                        <li><a href="https://www.benefitscheckup.org/" target="_blank"><strong>BenefitsCheckUp:</strong></a> Helps seniors with limited income find programs that may help pay for healthcare costs and medications.</li>
+                        <li><a href="https://www.pparx.org/" target="_blank"><strong>Partnership for Prescription Assistance:</strong></a> Helps qualifying patients without prescription drug coverage access needed medicines through patient assistance programs.</li>
+                        <li><a href="https://www.mat.org/" target="_blank"><strong>Medicine Assistance Tool:</strong></a> Search engine that helps patients find financial assistance programs for their medications.</li>
+                        <li><a href="https://www.panfoundation.org/" target="_blank"><strong>Patient Access Network Foundation:</strong></a> Provides financial assistance for out-of-pocket costs associated with prescribed medications.</li>
+                        <li><a href="https://www.patientadvocate.org/" target="_blank"><strong>Patient Advocate Foundation:</strong></a> Offers case management services and financial aid to patients with chronic, life-threatening, or debilitating conditions.</li>
+                        <li><a href="https://www.healthwellfoundation.org/" target="_blank"><strong>HealthWell Foundation:</strong></a> Provides financial assistance for medications, health insurance premiums, and other healthcare costs.</li>
+                        <li><a href="https://tafcares.org/" target="_blank"><strong>The Assistance Fund:</strong></a> Helps patients with chronic and serious illnesses pay for their medications and treatments.</li>
+                        <li><a href="https://www.211.org/" target="_blank"><strong>211.org:</strong></a> Connects people to local healthcare services and other resources.</li>
+                        <li><a href="https://familywize.org/" target="_blank"><strong>FamilyWize:</strong></a> Partners with pharmacies nationwide to negotiate prescription discounts.</li>
+                        <li><a href="https://freeclinicdirectory.org/" target="_blank"><strong>Free Clinic Directory:</strong></a> National database of free and charitable clinics for the uninsured and underinsured.</li>
+                        <li><a href="https://nhsc.hrsa.gov/sites/default/files/NHSC/NHSC-Sites/nhsc-site-data-explorer.html" target="_blank"><strong>NHSC Site Finder:</strong></a> Locates healthcare facilities with National Health Service Corps clinicians providing care in underserved areas.</li>
+                        <li><a href="https://www.ihs.gov/findhealthcare/" target="_blank"><strong>Indian Health Service Facility Locator:</strong></a> Helps Native Americans and Alaska Natives find IHS, Tribal, and Urban Indian health centers.</li>
+                        <li><a href="https://www.nafcclinics.org/find-clinic/" target="_blank"><strong>National Association of Free & Charitable Clinics:</strong></a> Helps locate free clinics across the country.</li>
+                        <li><a href="https://findahealthcenter.hrsa.gov/tool/mobile-clinic" target="_blank"><strong>HRSA Mobile Health Center Finder:</strong></a> Locates mobile clinics that provide healthcare services to underserved areas.</li>
+                        <li><a href="https://www.hud.gov/program_offices/public_indian_housing/programs/hcv/about/fact_sheet" target="_blank"><strong>HUD Housing Choice Voucher Program:</strong></a> Information about housing assistance, which can impact health outcomes and healthcare access.</li>
+                        <li><a href="https://www.ruralhealthinfo.org/topics/critical-access-hospitals" target="_blank"><strong>Critical Access Hospitals:</strong></a> Information about hospitals serving rural communities with limited healthcare options.</li>
+                        <li><a href="https://www.ruralhealthinfo.org/am-i-rural" target="_blank"><strong>Am I Rural? Tool:</strong></a> Determines if a location is considered rural for various federal healthcare programs and funding opportunities.</li>
+                        <li><a href="https://www.niddk.nih.gov/health-information/community-health-outreach/information-clearinghouses" target="_blank"><strong>NIDDK Health Information Clearinghouses:</strong></a> Free health information about diabetes, kidney, digestive diseases, and related conditions.</li>
+                    </ul>
+
+                    <h3 id="seniors">Senior & Disability Services</h3>
+                    <ul>
+                        <li><a href="https://www.benefitscheckup.org"><strong>BenefitsCheckUp:</strong></a> A tool by the National Council on Aging to help older adults and individuals with disabilities find benefit programs.</li>
+                        <li><a href="https://eldercare.acl.gov"><strong>Eldercare Locator:</strong></a> Connects older adults and caregivers to local services and resources.</li>
+                        <li><a href="https://acl.gov/programs/aging-and-disability-networks/aging-and-disability-resource-centers"><strong>Aging and Disability Resource Centers (ADRC):</strong></a> Offers local assistance for older adults and individuals with disabilities.</li>
+                        <li><a href="https://www.payingforseniorcare.com/resources/locator_tool"><strong>Paying for Senior Care Locator Tool:</strong></a> Helps find financial assistance programs for long-term care and related needs.</li>
+                        <li><a href="https://www.communityresourcefinder.org/"><strong>Community Resource Finder:</strong></a> A database by the Alzheimer's Association and AARP that helps locate dementia resources, housing options, care services, and community programs.</li>
+                        <li><a href="https://www.ramps.org/"><strong>RAMPS.org:</strong></a> Provides information about wheelchair ramps, home accessibility modifications, and resources for finding financial assistance for home adaptations.</li>
+                        <li><a href="https://www.usa.gov/benefit-finder"><strong>Benefits Finder:</strong></a> A government tool that helps seniors discover which federal benefits they may be eligible for based on their unique circumstances.</li>
+                        <li><a href="https://www.shiphelp.org/"><strong>State Health Insurance Assistance Program (SHIP) Locator:</strong></a> Connects older adults with free, unbiased Medicare counseling in their local area.</li>
+                        <li><a href="https://www.smpresource.org/"><strong>Senior Medicare Patrol (SMP) Locator:</strong></a> Helps seniors find local assistance with Medicare fraud prevention and reporting.</li>
+                        <li><a href="https://www.mealsonwheelsamerica.org/find-meals"><strong>Meals on Wheels Locator:</strong></a> Helps seniors find local meal delivery services in their area.</li>
+                        <li><a href="https://www.lifelonglinks.org/"><strong>LifeLong Links:</strong></a> Aging and Disability Resource Centers helping individuals maintain independence.</li>
+                        <li><a href="https://www.ncoa.org/older-adults/benefits/healthcare/medicare/"><strong>NCOA Medicare Resources:</strong></a> Provides unbiased guidance and counseling on Medicare options and enrollment.</li>
+                        <li><a href="https://www.ssa.gov/benefits/medicare/"><strong>Medicare Benefits Through Social Security:</strong></a> Information on Medicare eligibility, enrollment, and premium payments.</li>
+                        <li><a href="https://www.medicare.gov/basics/costs/help/medicare-savings-programs"><strong>Medicare Savings Programs:</strong></a> Helps low-income individuals pay for Medicare premiums, deductibles, and coinsurance.</li>
+                        <li><a href="https://www.medicaid.gov/medicaid/eligibility/seniors-medicare-and-medicaid-enrollees"><strong>Dual Eligibility (Medicare & Medicaid):</strong></a> Information for people who qualify for both Medicare and Medicaid.</li>
+                        <li><a href="https://acl.gov/programs/aging-and-disability-networks"><strong>Aging and Disability Networks:</strong></a> Local, state, and national organizations supporting older adults and people with disabilities.</li>
+                        <li><a href="https://www.211.org/"><strong>211 Services:</strong></a> Connects people to local resources including services for seniors and people with disabilities.</li>
+                        <li><a href="https://www.usa.gov/disability-services"><strong>USA.gov Disability Services:</strong></a> Federal information on disability benefits, working while receiving benefits, and caregiver assistance.</li>
+                        <li><a href="https://www.medicare.gov/care-compare/"><strong>Medicare Care Compare:</strong></a> Tool to find and compare Medicare-approved healthcare providers and facilities.</li>
+                        <li><a href="https://www.ssa.gov/benefits/disability/"><strong>Social Security Disability Benefits:</strong></a> Information on applying for and managing disability benefits through Social Security.</li>
+                        <li><a href="https://www.ssa.gov/benefits/ssi/"><strong>Supplemental Security Income (SSI):</strong></a> Federal program providing financial support for disabled adults and children with limited income.</li>
+                        <li><a href="https://www.nia.nih.gov/health/caregiving"><strong>National Institute on Aging Caregiving Resources:</strong></a> Information and support for those caring for older adults.</li>
+                        <li><a href="https://www.caregiver.org/"><strong>Family Caregiver Alliance:</strong></a> Support, resources, and education for family caregivers of adults with chronic health conditions.</li>
+                        <li><a href="https://www.ssa.gov/medicare/part-d-extra-help"><strong>Medicare Extra Help Program:</strong></a> Assists with prescription drug costs for people with limited resources.</li>
+                        <li><a href="https://www.medicare.gov/plan-compare/"><strong>Medicare Plan Finder:</strong></a> Official tool to compare Medicare health and drug plans.</li>
+                        <li><a href="https://www.accessibilitychecker.org/blog/grants-for-people-with-disabilities/"><strong>Grants for People with Disabilities:</strong></a> Information on financial assistance programs for people with disabilities.</li>
+                        <li><a href="https://www.usa.gov/senior-food-programs"><strong>Senior Food Assistance Programs:</strong></a> Federal programs providing food assistance for older adults.</li>
+                        <li><a href="https://www.ssa.gov/payee/"><strong>Representative Payee Program:</strong></a> Assistance for those who cannot manage their Social Security benefits.</li>
+                        <li><a href="https://www.medicare.gov/coverage/home-health-services"><strong>Medicare Home Health Services:</strong></a> Information on home health care coverage through Medicare.</li>
+                        <li><a href="https://www.hud.gov/program_offices/housing/mfh/progdesc/eld202"><strong>HUD Section 202 Housing:</strong></a> Supportive Housing for the Elderly Program information.</li>
+                        <li><a href="https://www.va.gov/health-care/about-va-health-benefits/long-term-care/"><strong>VA Long-term Care Services:</strong></a> Care options for eligible veterans needing extended care.</li>
+                        <li><a href="https://www.usa.gov/transportation-and-travel-options-older-adults"><strong>Transportation Options for Seniors:</strong></a> Information on transportation assistance programs.</li>
+                        <li><a href="https://www.medicaid.gov/medicaid/long-term-services-supports/money-follows-person/index.html"><strong>Money Follows the Person Program:</strong></a> Helps people move from institutions to community settings.</li>
+                        <li><a href="https://www.naela.org/findlawyer"><strong>National Academy of Elder Law Attorneys Finder:</strong></a> Helps seniors locate specialized attorneys for elder law issues.</li>
+                        <li><a href="https://www.irs.treasury.gov/freetaxprep/"><strong>VITA/TCE Locator:</strong></a> Finds free tax preparation assistance for seniors through the Tax Counseling for the Elderly program.</li>
+                    </ul>
+
+                    <h3 id="food">Food Assistance Resources</h3>
+                    <ul>
+                        <li><a href="https://www.feedingamerica.org"><strong>Feeding America:</strong></a> A nationwide network of food banks that provides access to food and hunger relief programs.</li>
+                        <li><a href="https://www.fns.usda.gov/national-hunger-hotline#:~:text=If%20you%20need%20food%20assistance,at%20914-342-7744"><strong>National Hunger Hotline:</strong></a> Connects individuals to local emergency food providers and government nutrition programs. Operated by the USDA.</li>
+                        <li><a href="https://foodfinder.us"><strong>FoodFinder:</strong></a> A ZIP code-based tool to find free food assistance programs and food pantries across the U.S.</li>
+                        <li><a href="https://whyhunger.org"><strong>WhyHunger:</strong></a> Offers a national database of food pantries, meal programs, and long-term solutions to hunger and poverty.</li>
+                        <li><a href="https://www.mealsonwheelsamerica.org/find-meals"><strong>Meals on Wheels:</strong></a> Connects seniors with community-based meal delivery programs nationwide.</li>
+                        <li><a href="https://performancekitchen.com/?srsltid=AfmBOopL9vcaAGAyXfohcWE4b-PDFhLh_EDIDVwn7NQd2dKzB3bnlbnn"><strong>Performance Kitchen:</strong></a> Delivers nutritious, chef-prepared meals to your door. Call 1-844-607-0676 or email info@performancekitchen.com for more information. Check with your insurer for coverage.</li>
+                        <li><a href="https://www.homestyledirect.com/"><strong>Homestyle Direct:</strong></a> Offers comfort-style meal delivery. Call 1-866-735-0921 or 1-877-508-6667. Email support@homestyledirect.com. Insurance coverage may apply.</li>
+                        <li><a href="https://www.glwd.org/"><strong>God's Love We Deliver:</strong></a> Provides medically tailored meals for individuals facing serious illness. Call 212-294-8100. Insurance may cover service.</li>
+                        <li><a href="https://www.momsmeals.com/"><strong>Mom’s Meals:</strong></a> Delivers meals for seniors and individuals with dietary needs. Call 1-877-508-6667. Check with your insurance plan.</li>
+                        <li><a href="https://lasagnalove.org/"><strong>Lasagna Love:</strong></a> A volunteer-powered program delivering homemade meals to families in need.</li>
+                    </ul>
+                    <h3 id="nutrition">Nutrition Resources</h3>
+                    <ul>
+                        <li><a href="https://www.eatright.org/find-a-nutrition-expert"><strong>Find a Registered Dietitian Nutritionist:</strong></a> Search tool by the Academy of Nutrition and Dietetics to locate credentialed nutrition professionals in your area.</li>
+                        <li><a href="https://www.faynutrition.com/"><strong>Fay Nutrition:</strong></a> Nutrition counseling services focused on helping individuals achieve their health goals through personalized nutrition guidance.</li>
+                        <li><a href="https://llsnutrition.org" target="_blank"><strong>LLS Nutrition (Leukemia & Lymphoma Society):</strong></a> Offers free one-on-one phone consultations with oncology registered dietitians for patients and caregivers of all cancer types, focusing on nutritional needs during and after treatment.</li>
+                        <li><a href="https://www.myplate.gov/"><strong>MyPlate:</strong></a> USDA's nutrition guide providing practical information and tools to help make healthy eating choices at any age.</li>
+                        <li><a href="https://www.nia.nih.gov/health/healthy-eating"><strong>National Institute on Aging - Healthy Eating:</strong></a> Evidence-based nutrition information specifically for older adults.</li>
+                        <li><a href="https://health.gov/our-work/nutrition-physical-activity/dietary-guidelines"><strong>Dietary Guidelines for Americans:</strong></a> Science-based advice on what to eat and drink to promote health and reduce risk of chronic disease.</li>
+                        <li><a href="https://www.ncoa.org/adviser/food-security/"><strong>NCOA Food Security Resources:</strong></a> Information on programs that help older adults access nutritious food.</li>
+                        <li><a href="https://acl.gov/programs/health-wellness/nutrition-services"><strong>Administration for Community Living Nutrition Services:</strong></a> Programs that provide meals and nutrition services to older adults.</li>
+                        <li><a href="https://www.fns.usda.gov/snap/supplemental-nutrition-assistance-program"><strong>Supplemental Nutrition Assistance Program (SNAP):</strong></a> Helps low-income individuals and families purchase nutritious food.</li>
+                        <li><a href="https://www.fns.usda.gov/csfp/commodity-supplemental-food-program"><strong>Commodity Supplemental Food Program (CSFP):</strong></a> Provides food packages to low-income seniors aged 60 and above.</li>
+                        <li><a href="https://www.nutrition.gov/topics/nutrition-age/seniors"><strong>Nutrition.gov Senior Nutrition:</strong></a> Federal resources on nutrition for older adults, including healthy eating tips and meal planning.</li>
+                        <li><a href="https://www.fda.gov/food/consumers/older-adults and-food-safety"><strong>FDA Food Safety for Older Adults:</strong></a> Information on food safety practices particularly important for seniors.</li>
+                        <li><a href="https://www.medicarefaq.com/faqs/does-medicare-cover-nutritionists/"><strong>Medicare Coverage for Nutrition Services:</strong></a> Information on when Medicare covers medical nutrition therapy and counseling.</li>
+                        <li><a href="https://www.choosemyplate.gov/browse-by-audience/view-all-audiences/adults/older-adults"><strong>MyPlate for Older Adults:</strong></a> Nutrition recommendations specifically tailored to the needs of older adults.</li>
+                        <li><a href="https://www.todaysgeriatricmedicine.com/archive/0313p24.shtml"><strong>Nutrition Challenges for the Elderly:</strong></a> Information about addressing the unique nutritional challenges that come with aging.</li>
+                    </ul>
+
+                    <h3 id="financial">Financial & Connectivity Assistance</h3>
+                    <ul>
+                        <li><a href="https://www.modestneeds.org" target="_blank"><strong>Modest Needs Foundation:</strong></a> Offers small grants for individuals and families in temporary financial crisis.</li>
+                        <li><a href="https://www.affordableconnectivity.gov" target="_blank"><strong>Affordable Connectivity Program:</strong></a> Helps low-income households afford broadband internet service.</li>
+                        <li><a href="https://www.benefits.gov" target="_blank"><strong>Benefits.gov:</strong></a> A comprehensive guide to government benefits, including financial aid, food, housing, and healthcare programs.</li>
+                        <li><a href="https://www.cms.gov" target="_blank"><strong>Centers for Medicare & Medicaid Services (CMS):</strong></a> Official government source for information on Medicare, Medicaid, and related healthcare assistance programs.</li>
+                        
+                        <li><a href="https://www.cancercare.org" target="_blank"><strong>CancerCare:</strong></a> Offers financial assistance, support groups, and resources for cancer patients and caregivers.</li>
+                        <li><a href="https://www.needymeds.org" target="_blank"><strong>NeedyMeds:</strong></a> Provides information on programs that help with the cost of medications and healthcare.</li>
+                        <li><a href="https://www.rxassist.org" target="_blank"><strong>RxAssist:</strong></a> A directory of patient assistance programs for affordable medications.</li>
+                        <li><a href="https://www.goodrx.com" target="_blank"><strong>GoodRx:</strong></a> Helps individuals find discounts and pricing for prescription medications.</li>
+                        <li><a href="https://www.togetherrxaccess.com" target="_blank"><strong>TogetherRxAccess:</strong></a> Offers discounts on prescription medications for qualifying individuals.</li>
+                        <li><a href="https://www.patientadvocate.org" target="_blank"><strong>Patient Advocate Foundation:</strong></a> Provides case management services to help patients with chronic illnesses access healthcare and financial aid.</li>
+                        <li><a href="https://www.211.org" target="_blank"><strong>2-1-1 Services:</strong></a> Provides assistance to find local resources including crisis, food, health and housing.</li>
+                        <li><a href="https://allysonwhitney.org" target="_blank"><strong>Allyson Whitney Foundation:</strong></a> Provides "Life Interrupted grants" between $500–$1,500 for women undergoing treatment for rare cancer between the ages of 16–36.</li>
+                        <li><a href="https://brightspotnetwork.org" target="_blank"><strong>Bright Spot Network:</strong></a> Bright Spot grants are available for those diagnosed with cancer and caring for a child between ages of 0–6.</li>
+                        <li><a href="https://dollarfor.org" target="_blank"><strong>Dollar For:</strong></a> Offers education and navigation help for patients seeking financial assistance with medical bills through hospital charity care programs.</li>
+                        <li><a href="https://entertainmentcommunity.org" target="_blank"><strong>Entertainment Community Fund:</strong></a> A safety net for those in the entertainment and performing arts industry, providing support with illness, disability, and burial expenses.</li>
+                        <li><a href="https://familyreach.org" target="_blank"><strong>Family Reach:</strong></a> Financial assistance and resource navigation for cancer patients and caregivers needing help with non-medical expenses.</li>
+                        <li><a href="https://www.mygooddays.org" target="_blank"><strong>Good Days:</strong></a> Provides financial assistance and advocacy for people pursuing life-saving and life-extending treatment.</li>
+                        <li><a href="https://www.healthwellfoundation.org" target="_blank"><strong>HealthWell Foundation:</strong></a> Provides financial assistance toward medical treatments and associated costs.</li>
+                        <li><a href="https://homeownershippreservation.org" target="_blank"><strong>Homeownership Preservation Foundation:</strong></a> A nonprofit that helps people avoid mortgage foreclosure through free counseling and resources.</li>
+                        <li><a href="https://www.hrsa.gov/hospital-resources/hill-burton" target="_blank"><strong>Hill-Burton Free and Reduced Cost Health Care:</strong></a> About 170 facilities are obligated to provide free or reduced-cost care to those who qualify financially.</li>
+                        <li><a href="https://keepswimmingfoundation.org" target="_blank"><strong>Keep Swimming Foundation:</strong></a> Offers financial assistance for patients undergoing inpatient treatment for 21+ consecutive days. (Check for active status.)</li>
+                        <li><a href="https://www.fns.usda.gov/programs" target="_blank"><strong>Nutrition Assistance Programs:</strong></a> Includes SNAP, WIC, and other government food aid programs for eligible individuals and families.</li>
+                        <li><a href="https://ovarcome.org/ovarcare" target="_blank"><strong>OvarCare Program (through Ovarcome):</strong></a> Provides financial, psychosocial, and informational support for ovarian cancer patients in treatment.</li>
+                        <li><a href="https://www.panfoundation.org" target="_blank"><strong>Patient Access Network (PAN) Foundation:</strong></a> Offers co-payment assistance (up to $3,700/year) to eligible patients, including the Extra Help Program for utilities and medication support.</li>
+                        <li><a href="https://www.patientresource.com" target="_blank"><strong>Patient Resource:</strong></a> Offers a directory of organizations providing financial help for cancer patients.</li>
+                        <li><a href="https://www.teammb.org" target="_blank"><strong>Team MB – Hunt for the Cure (South NJ):</strong></a> Offers grants (up to $5,000/year) to women in South Jersey undergoing or recovering from ovarian cancer treatment.</li>
+                        <li><a href="https://thesamfund.org" target="_blank"><strong>The Samfund:</strong></a> Provides financial assistance and virtual support for young adult cancer survivors.</li>
+                        <li><a href="https://vitaloptions.org" target="_blank"><strong>Vital Options Grant Program:</strong></a> Offers emergency grants to individuals facing cancer-related financial hardship.</li>
+                        <li><a href="https://www.hhs.gov/answers/programs-for-families-and-children/what-is-tanf/index.html" target="_blank"><strong>Temporary Assistance for Needy Families (TANF):</strong></a> Federal program offering monthly cash assistance to cover food, clothing, housing, utilities, transportation, and medical supplies for low-income families.</li>
+                        <li><a href="https://www.helpwithpayingbills.org" target="_blank"><strong>HelpWithPayingBills.org:</strong></a> A resource site offering information on local programs that help pay utility, rent, prescription, and other household bills.</li>
+                        <li><a href="https://www.copays.org" target="_blank"><strong>Patient Advocate Foundation Co-Pay Relief Program:</strong></a> Offers copay assistance to insured patients living with chronic or life-threatening conditions.</li>
+                        <li><a href="https://freemedicine.com" target="_blank"><strong>FreeMedicine.com:</strong></a> Helps eligible patients obtain prescription medications for free through pharmaceutical company programs.</li>
+                        <li><a href="https://www.rxhope.com" target="_blank"><strong>RxHope:</strong></a> Connects patients with patient assistance programs provided by pharmaceutical companies.</li>
+                        <li><a href="https://rarediseases.org" target="_blank"><strong>National Organization for Rare Disorders (NORD):</strong></a> Offers patient assistance and financial support for individuals with rare diseases.</li>
+                        <li><a href="https://www.consumerfinance.gov/ask-cfpb/is-there-financial-help-for-my-medical-bills-en-2124" target="_blank"><strong>Consumer Financial Protection Bureau:</strong></a> Guide to financial assistance options for medical bills and managing healthcare costs.</li>
+                        <li><a href="https://www.medicare.gov/plan-compare/#/pharmaceutical-assistan
+
+                    </ul>
+
+                    <h3 id="housing">Housing Resources</h3>
+                    <ul>
+                        <li><a href="https://www.hud.gov/newyork"><strong>HUD Housing Help:</strong></a> Find affordable housing and avoid foreclosure through federal assistance.</li>
+                        <li><a href="https://www.usa.gov/housing-help"><strong>USA.gov Housing Help:</strong></a> Central portal for housing, rental assistance, foreclosure support, and more.</li>
+                        <li><a href="https://resources.hud.gov"><strong>HUD Resource Locator:</strong></a> Locate HUD offices, public housing agencies, and local services.</li>
+                        <li><a href="https://www.hud.gov/topics/information_for_senior_citizens"><strong>HUD Information for Seniors:</strong></a> Affordable housing and services geared toward older adults.</li>
+                        <li><a href="https://www.hud.gov/program_offices/public_indian_housing/ih"><strong>Native American Housing Assistance:</strong></a> Federal housing programs and funding for tribal communities.</li>
+
+                        <li><a href="https://www.hud.gov/helping-americans/housing-choice-vouchers-tenants"><strong>Housing Choice Voucher Program:</strong></a> Rental assistance for low-income families, elderly persons, veterans and disabled individuals in the private housing market.</li>
+                        <li><a href="https://www.usa.gov/housing-voucher-section-8"><strong>Section 8 Housing Choice Voucher Application:</strong></a> Find your local public housing agency to apply for a housing choice voucher or check application status.</li>
+
+                        <li><a href="https://home.treasury.gov/policy-issues/coronavirus/assistance-for-state-local-and-tribal-governments/emergency-rental-assistance-program"><strong>Emergency Rental Assistance Program:</strong></a> $46 billion in federal funding to help renters affected by COVID-19 pandemic pay rent and utilities.</li>
+                        <li><a href="https://home.treasury.gov/policy-issues/coronavirus/assistance-for-state-local-and-tribal-governments/emergency-rental-assistance-program/program-index"><strong>Find Rental Assistance:</strong></a> Treasury's directory of state and local Emergency Rental Assistance programs.</li>
+                        <li><a href="https://nlihc.org/rental-assistance"><strong>NLIHC Rental Assistance Database:</strong></a> Up-to-date information on the application status of Treasury ERA programs.</li>
+
+                        <li><a href="https://www.hud.gov/helping-americans/housing-choice-vouchers-homeless-veterans"><strong>HUD-VASH Program:</strong></a> Housing Choice Vouchers combined with VA supportive services for homeless Veterans.</li>
+                        <li><a href="https://www.hud.gov/helping-americans/avoiding-foreclosure"><strong>Foreclosure Prevention:</strong></a> Resources for homeowners experiencing difficulties making mortgage payments.</li>
+                        <li><a href="https://www.usa.gov/avoid-foreclosure"><strong>Avoid Foreclosure Resources:</strong></a> Find HUD-approved housing counseling agencies and free local foreclosure prevention services.</li>
+
+                        <li><a href="https://www.va.gov/homeless/housing.asp"><strong>VA Housing Assistance:</strong></a> Permanent housing assistance programs for Veterans who are homeless or at risk.</li>
+                        <li><a href="https://nhc.org/policy-guide/federal-rental-and-homeownership-programs/federal-homelessness-assistance-program/"><strong>Federal Homelessness Assistance:</strong></a> Programs that work to house people experiencing homelessness, including Continuum of Care and Emergency Solutions Grant.</li>
+                        <li><a href="https://www.usa.gov/emergency-housing"><strong>Emergency Housing Resources:</strong></a> Find shelter resources and programs that can help you find short-term housing.</li>
+                    </ul>
+
+                    <h3 id="directories">Directories & General Support</h3>
+                    <ul>
+                        <li><a href="https://www.usa.gov/benefit-finder"><strong>USA.gov Benefit Finder:</strong></a> Helps individuals find federal and state benefits, including healthcare assistance, food programs, housing support, and financial aid.</li>
+                        <li><a href="https://www.benefitscheckup.org"><strong>BenefitsCheckUp:</strong></a> A tool by the National Council on Aging to help older adults and individuals with disabilities find programs to assist with healthcare, medication, food, utilities, and other expenses.</li>
+                        <li><a href="https://www.communityresourcefinder.org"><strong>Community Resource Finder:</strong></a> Search tool for healthcare, elder care, housing, and support services.</li>
+                        <li><a href="https://www.cancer.org/support-programs-and-services/resource-search.html"><strong>American Cancer Society Resource Search:</strong></a> Searchable database of ACS programs and services nationwide, including patient navigation, transportation assistance, lodging during treatment, support groups, and educational materials.</li>
+                        <li><a href="https://www.211.org"><strong>211:</strong></a> A nationwide directory connecting individuals to local services including food, housing, and healthcare.</li>
+                        <li><a href="https://www.benefits.gov"><strong>Benefits.gov:</strong></a> Find federal and state benefit programs based on individual needs and eligibility.</li>
+                        <li><a href="https://nrd.gov"><strong>National Resource Directory:</strong></a> Federal resource for veterans, service members, and their families to find services and support.</li>
+                        <li><a href="https://www.salvationarmyusa.org"><strong>Salvation Army USA:</strong></a> Provides a wide range of support services including housing, food, utilities, and disaster relief.</li>
+                        <li><a href="https://www.feedingamerica.org/find-your-local-foodbank"><strong>Feeding America Food Bank Locator:</strong></a> Search by ZIP code or state to find one of the 200+ member food banks and partner pantries nationwide.</li>
+                        <li><a href="https://www.hud.gov/findshelter"><strong>HUD Find Shelter:</strong></a> Mobile-friendly search for local shelters, food pantries, health clinics, and clothing closets.</li>
+                        <li><a href="https://resources.hud.gov"><strong>HUD Resource Locator:</strong></a> Interactive map and directory for affordable rental housing, public housing authorities, and HUD field offices nationwide.</li>
+                        <li><a href="https://hudapps.hud.gov/nhls/"><strong>National Housing Locator System (NHLS):</strong></a> Web-based clearinghouse of available rental housing and government-owned homes for sale—search by state, rent amount, or housing type.</li>
+                        <li><a href="https://www.hud.gov/findacounselor"><strong>Housing Counseling Agency Locator:</strong></a> Search HUD-approved housing counseling agencies by ZIP code or state—or call 1-800-569-4287—for assistance with renting, buying, foreclosure prevention, and housing stability.</li>
+                        <li><a href="https://liheap.ncat.org"><strong>LIHEAP State/Territory Contacts:</strong></a> Finder for your state’s Low Income Home Energy Assistance Program offices, which provide heating/cooling bill support via local agencies.</li>
+                        <li><a href="https://www.acf.hhs.gov/ocs/programs/liheap"><strong>Office of Community Services – LIHEAP Program Page:</strong></a> Federal overview with links to state LIHEAP resources and contact info for utility assistance.</li>
+                        <li><a href="https://www.findhelp.org"><strong>Findhelp.org (formerly Aunt Bertha):</strong></a> Nationwide searchable directory—filter by “Utilities Assistance” to locate local providers of energy, water bill help, and other community-based services.</li>
+                        <li><a href="https://communityactionpartnership.com/find-a-cap"><strong>Community Action Partnership – CAP Agency Locator:</strong></a> Search for local Community Action Agencies that administer LIHEAP and other utility assistance programs by ZIP code or state.</li>
+                        <li><a href="https://www.acf.hhs.gov/ocs/programs/lihwap"><strong>Office of Community Services – LIHWAP Program Page:</strong></a> Federal program for helping low-income households pay residential water and wastewater bills via state-administered assistance.</li>
+                        <li><a href="https://www.energy.gov/eere/wap/weatherization-assistance-program"><strong>Weatherization Assistance Program (WAP):</strong></a> DOE program that reduces energy costs for low-income households through home weatherization services.</li>
+                        <li><a href="https://www.catholiccharitiesusa.org/about-us/find-a-local-agency/"><strong>Catholic Charities USA Locator:</strong></a> Search for local Catholic Charities agencies that provide utilities assistance, rent help, and other social services.</li>
+                        <li><a href="https://modestneeds.org"><strong>Modest Needs Foundation:</strong></a> Offers microgrants to individuals facing emergency expenses including utilities, rent, and medical bills.</li>
+                        <li><a href="https://redrover.org/additional-resources"><strong>RedRover:</strong></a> Provides resources for animal welfare organizations and individuals needing veterinary care assistance.</li>
+                        <li><a href="https://whyhunger.org"><strong>WhyHunger:</strong></a> Community Food Locator to help individuals find local food pantries, soup kitchens, and other hunger-relief programs nationwide.</li>
+                        <li><a href="https://foodfinder.us"><strong>FoodFinder:</strong></a> Searchable database of food banks, pantries, and meal programs across the U.S., with filters for ZIP code, hours, and eligibility requirements.</li>
+                    </ul>
+
+                </section>
+
+                <section id="dental-assistance" class="resource-section">
+                    <h2>Dental Care Resources</h2>
+
+                    <h3>Ask Your Dentist</h3>
+                    <ul>
+                        <li><a href="https://findadentist.ada.org/?_gl=1*j1el7o*_ga*MzU4MTI4ODk5LjE3NDQ0NTM3NTg.*_ga_NVSBFQCBYE*MTc0NDQ1Mzc1OC4xLjAuMTc0NDQ1Mzc2Ni41Mi4wLjA.*_ga_JDE0LTHGWL*MTc0NDQ1Mzc1OC4xLjAuMTc0NDQ1Mzc2Ni41Mi4wLjA."><strong>Find-A-Dentist (American Dental Association):</strong></a> Use this tool to locate nearby dentists—many offer membership savings plans or participate in free/low-cost care days in their communities.</li>
+                    </ul>
+
+                    <h3>Federally Qualified Health Centers</h3>
+                    <ul>
+                        <li><a href="https://findahealthcenter.hrsa.gov/"><strong>HRSA Health Center Finder:</strong></a> Locate a Federally Qualified Health Center that provides dental care on a sliding fee scale based on income, regardless of insurance status.</li>
+                    </ul>
+
+                    <h3>State Oral Health Coalitions</h3>
+                    <ul>
+                        <li><a href="https://www.anohc.org/members"><strong>American Network of Oral Health Coalitions (ANOHC):</strong></a> Find your state's oral health coalition for information on local dental programs and resources in your area.</li>
+                    </ul>
+
+                    <h3>Community Referral Resources</h3>
+                    <ul>
+                        <li><a href="https://www.unitedway.org/find-your-united-way/"><strong>United Way:</strong></a> Connect with your local United Way chapter for help finding free or low-cost dental care services in your community.</li>
+                        <li><a href="https://www.needymeds.org/dental-clinics"><strong>NeedyMeds Dental Clinic Directory:</strong></a> Search for free or sliding-scale dental clinics across the U.S. using this national directory.</li>
+                        <li><a href="https://www.cdc.gov/publichealthgateway/healthdirectories/index.html"><strong>Local and State Health Departments:</strong></a> Contact your local or state health department to learn more about dental programs and financial assistance options available near you.</li>
+                        <li><a href="https://www.hhs.gov/answers/health-insurance-reform/where-can-i-find-low-cost-dental-care/index.html"><strong>HHS Low-Cost Dental Care Guide:</strong></a> Offers a comprehensive overview of federal and local programs—including community health centers, dental schools, and clinical trials—that provide affordable dental services.</li>
+                    </ul>
+                </section>
+
+                <section id="mental-health" class="resource-section">
+                    <h2>Mental Health, Substance Abuse, and Tobacco Cessation Resources</h2>
+                    <p>Access national hotlines, treatment locators, peer recovery programs, and quitting support for mental health, alcohol, drugs, and tobacco.</p>
+
+                    <h3>Mental Health & Crisis Support</h3>
+                    <ul>
+                        <li><a href="https://988lifeline.org"><strong>988 Suicide & Crisis Lifeline:</strong></a> Call or text 988 for 24/7, free, and confidential crisis support.</li>
+                        <li><a href="https://www.nami.org"><strong>National Alliance on Mental Illness (NAMI):</strong></a> Offers mental health education, peer support groups, and advocacy nationwide.</li>
+                        <li><a href="https://www.nami.org/help"><strong>NAMI National Helpline:</strong></a> Call 1-800-950-NAMI (6264), text "Helpline" to 62640, or email helpline@nami.org for support.</li>
+                        <li><a href="https://www.crisistextline.org/"><strong>Crisis Text Line:</strong></a> Text HOME to 741741 to connect with a trained volunteer crisis counselor.</li>
+                        <li><a href="https://seizetheawkward.org/"><strong>Seize the Awkward:</strong></a> Helps young people start conversations about mental health with friends and peers.</li>
+                        <li><a href="https://www.prevention.org/"><strong>Prevention First:</strong></a> Offers behavioral health training, prevention strategies, and substance misuse resources in Illinois.</li>
+                        <li><a href="https://findtreatment.gov"><strong>FindTreatment.gov:</strong></a> A confidential and anonymous resource for locating mental health and substance use treatment services across the U.S.</li>
+                        <li><a href="https://mhanational.org/finding-help"><strong>Mental Health America – Finding Help:</strong></a> Guidance on how to find help for mental health concerns, including support groups and affordable care.</li>
+                        <li><a href="https://www.psychologytoday.com/us/therapists"><strong>Psychology Today Therapist Finder:</strong></a> Search for licensed therapists in your area by specialty, insurance, and more.</li>
+                        <li><a href="https://www.samhsa.gov/find-help"><strong>SAMHSA Find Help:</strong></a> Federal resource hub for mental health, substance abuse, and behavioral health services.</li>
+                        <li><a href="https://www.veteranscrisisline.net/"><strong>Veterans Crisis Line:</strong></a> Call 988 then press 1, or text 838255, for 24/7 support for veterans and their families.</li>
+                        <li><a href="https://www.samhsa.gov/find-help/national-helpline"><strong>SAMHSA National Helpline:</strong></a> 1-800-662-HELP (4357) — a free, confidential, 24/7 treatment referral and information service.</li>
+                        <li><a href="https://www.samhsa.gov/find-help/disaster-distress-helpline"><strong>Disaster Distress Helpline:</strong></a> Call or text 1-800-985-5990 for crisis counseling related to natural or human-caused disasters.</li>
+                        <li><a href="https://www.samhsa.gov/esmi-treatment-locator"><strong>SAMHSA ESMI Treatment Locator:</strong></a> Helps locate early serious mental illness (ESMI) programs in your area.</li>
+                    </ul>
+
+                    <h3>Substance Use and Recovery Services</h3>
+                    <ul>
+                        <li><a href="https://findtreatment.gov"><strong>FindTreatment.gov:</strong></a> National database to locate substance use and mental health treatment services. Call 1-800-662-HELP (4357).</li>
+                        <li><a href="https://www.samhsa.gov/find-help/national-helpline"><strong>SAMHSA National Helpline:</strong></a> 24/7 free and confidential help for individuals and families facing substance abuse or mental health challenges.</li>
+                        <li><a href="https://helplineil.org/"><strong>Illinois Helpline for Opioids & Other Substances:</strong></a> Free, confidential support and referrals. Call 1-833-2FINDHELP.</li>
+                        <li><a href="https://www.dhs.state.il.us/page.aspx?item=123318"><strong>Illinois DHS Substance Use Disorder Services:</strong></a> Access statewide treatment programs and licensed providers.</li>
+                        <li><a href="https://www.na.org/"><strong>Narcotics Anonymous (NA):</strong></a> Assists people recovering from prescription or illicit drug use. Find meetings or online support.</li>
+                        <li><a href="https://www.nar-anon.org/"><strong>NAR-Anon Family Groups:</strong></a> Provides support for those affected by someone else’s drug addiction.</li>
+                        <li><a href="https://virtual-na.org/meetings/"><strong>Virtual NA Meetings:</strong></a> Search for online Narcotics Anonymous meetings held nationally.</li>
+                        <li><a href="https://www.onepromisena.org/"><strong>One Promise Group of NA:</strong></a> Online Narcotics Anonymous support meetings.</li>
+                        <li><a href="http://www.uhgna.com/"><strong>Universal Hope Group of NA:</strong></a> Virtual NA group offering weekly recovery meetings.</li>
+                    </ul>
+
+                    <h3>Alcohol Recovery Support</h3>
+                    <ul>
+                        <li><a href="https://alcoholtreatment.niaaa.nih.gov/"><strong>NIAAA Alcohol Treatment Navigator:</strong></a> Helps adults find science-based alcohol treatment options for themselves or loved ones.</li>
+                        <li><a href="https://www.aa.org/find-aa"><strong>Alcoholics Anonymous (A.A.):</strong></a> A fellowship supporting people recovering from alcoholism. Search for local or online meetings.</li>
+                        <li><a href="https://www.al-anon.org/"><strong>Al-Anon Family Groups:</strong></a> Offers support for family and friends affected by someone’s drinking. Find in-person or virtual meetings.</li>
+                    </ul>
+
+                    <h3>Tobacco and Vaping Cessation</h3>
+                    <ul>
+                        <li><a href="https://smokefree.gov/"><strong>Smokefree.gov:</strong></a> Federal tools and personalized quit plans for tobacco and vaping cessation.</li>
+                        <li><a href="https://www.cdc.gov/tobacco/quit_smoking/"><strong>CDC Quit Smoking Resources:</strong></a> Evidence-based tips and guides from former smokers to help users quit for good.</li>
+                        <li><a href="http://familydoctor.org/familydoctor/en/diseases-conditions/tobacco-addiction.html"><strong>FamilyDoctor.org - Tobacco Addiction:</strong></a> Offers medical insight and quitting strategies for tobacco use.</li>
+                        <li><a href="https://www.aafp.org/family-physician/patient-care/care-resources/tobacco-and-nicotine/tobacco-tools.html"><strong>AAFP Tobacco Cessation Tools:</strong></a> Educational resources for quitting tobacco, provided by the American Academy of Family Physicians.</li>
+                        <li><a href="https://www.lung.org/quit-smoking"><strong>American Lung Association Lung HelpLine:</strong></a> Call 1-800-LUNGUSA (1-800-586-4872) for free counseling from respiratory therapists.</li>
+                        <li><a href="https://www.quitline.org/"><strong>National Quitline:</strong></a> Call 1-800-QUIT-NOW (1-800-784-8669) to reach your state’s quitline for free help.</li>
+                        <li><a href="https://www.quityes.org/"><strong>Illinois Tobacco Quitline:</strong></a> Free counseling and quitting tools for Illinois residents. Call 1-866-QUIT-YES.</li>
+                        <li><a href="https://www.cancer.org/healthy/stay-away-from-tobacco/guide-quitting-smoking.html"><strong>You Can Quit Tobacco Guide:</strong></a> Practical advice and strategies to stop smoking from the American Cancer Society.</li>
+                    </ul>
+
+                    <h3>Accessing Free or Discounted Nicotine Patches</h3>
+                    <ul>
+                        <li><a href="https://www.lung.org/policy-advocacy/tobacco/cessation/tobacco-cessation-treatment-what-is-covered"><strong>Use Your Insurance:</strong></a> Insurance may fully or partially cover nicotine patches with a prescription. If not covered in full, HSA or FSA funds may be used to offset remaining costs.</li>
+                        <li><a href="https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/index.html"><strong>Check State Quitline Programs:</strong></a> Many states offer free nicotine patches through quitlines. Call 1-800-QUIT-NOW or text “QUITNOW” to 333888 for access to local programs and quit coaches.</li>
+                        <li><a href="https://www.goodrx.com/nicotine?label_override=nicotine&dosage=21mg&form=patch&quantity=28"><strong>GoodRx Nicotine Patch Coupons:</strong></a> Save up to 70% on generic nicotine patches at participating pharmacies. A prescription is required for over-the-counter use with a coupon.</li>
+                        <li><a href="https://www.goodrx.com/corporate/business/heres-how-to-use-a-goodrx-coupon-with-your-over-the-counter-medication"><strong>How to Use a GoodRx Coupon for OTC Medications:</strong></a> Step-by-step guidance on using GoodRx for nicotine patches and other non-prescription products.</li>
+                    </ul>
+                </section>
+
+
+                <section id="cancer-resources" class="resource-section">
+                    <h2>Cancer Organizations & Financial Assistance Resources</h2>
+                    <p>Below is a comprehensive list of cancer-specific organizations offering financial assistance by cancer type and subtype.</p>
+
+                    <h3 id="breast-cancer">Breast Cancer</h3>
+                    <ul>
+                        <li><a href="https://www.komen.org/treatment-assistance-program/"><strong>Susan G. Komen:</strong></a> Offers financial assistance and resources for those undergoing breast cancer treatment.</li>
+                        <li><a href="https://www.bcrf.org/patient-resources/financial-assistance/"><strong>Breast Cancer Research Foundation:</strong></a> Links to financial support programs for breast cancer patients.</li>
+                        <li><a href="https://www.lbbc.org/financial-assistance"><strong>Living Beyond Breast Cancer:</strong></a> Provides grants and aid for breast cancer patients.</li>
+                        <li><a href="https://pinkfund.org/get-help/"><strong>The Pink Fund:</strong></a> Offers 90-day non-medical cost-of-living support to breast cancer patients in active treatment.</li>
+                        <li><a href="https://www.abcf.org/programs/breast-cancer-assistance-program"><strong>The Breast Cancer Assistance Program:</strong></a> Offers financial help to those undergoing breast cancer care.</li>
+                        <li><a href="https://breastcanceralliance.org/financial-assistance/"><strong>Breast Cancer Alliance:</strong></a> Funding and support for breast cancer patients.</li>
+                        <li><a href="https://sharsheret.org/resource/financial-support/"><strong>Sharsheret:</strong></a> Financial and emotional support for Jewish women with breast cancer.</li>
+                    </ul>
+
+                    <h3 id="pancreatic-cancer">Pancreatic Cancer</h3>
+                    <ul>
+                        <li><a href="https://pancan.org/facing-pancreatic-cancer/patient-services/financial-legal-resources/"><strong>PanCAN (Pancreatic Cancer Action Network):</strong></a> Provides financial and legal resources to individuals with pancreatic cancer.</li>
+                    </ul>
+
+                    <h3 id="sarcoma">Sarcoma (All Types)</h3>
+                    <ul>
+                        <li><a href="https://sarcomaalliance.org/resources/financial-assistance/"><strong>Sarcoma Alliance:</strong></a> Offers financial assistance and travel reimbursements.</li>
+                        <li><a href="https://www.curesarcoma.org/patient-resources/assistance-resources/"><strong>Sarcoma Foundation of America:</strong></a> Provides assistance resources and guidance.</li>
+                        <li><a href="https://www.nwsarcoma.org/patient-resources/financial-resources/"><strong>Northwest Sarcoma Foundation:</strong></a> Financial grants and support services for sarcoma patients.</li>
+                        <li><a href="https://sarcomahelp.org/articles/financial-assistance.html"><strong>Liddy Shriver Sarcoma Initiative:</strong></a> Financial and emotional support for people affected by sarcoma.</li>
+                    </ul>
+
+                    <h3 id="leiomyosarcoma">Leiomyosarcoma (LMS)</h3>
+                    <ul>
+                        <li><a href="https://www.lmsdr.org/resources/financial-assistance/"><strong>LMSarcoma Direct Research Foundation:</strong></a> Provides financial assistance information and links.</li>
+                        <li><a href="https://nlmsf.org/patient-resources/financial-resources/"><strong>National Leiomyosarcoma Foundation:</strong></a> Financial support and resources for individuals diagnosed with LMS.</li>
+                        <li><a href="https://lmsdr.org/financial-assistance/"><strong>Leiomyosarcoma Support & Direct Research Foundation:</strong></a> Funding support for LMS treatment and costs.</li>
+                        <li><a href="https://www.ulmsawareness.org/resources/financial-aid/"><strong>ULMS - Uterine Leiomyosarcoma Awareness:</strong></a> Offers financial aid resources for patients with ULMS.</li>
+                    </ul>
+
+                    <h3 id="gist">GIST (Gastrointestinal Stromal Tumor)</h3>
+                    <ul>
+                        <li><a href="https://www.gistsupport.org/resources/financial-assistance/"><strong>GIST Support International:</strong></a> Provides financial assistance for GIST patients.</li>
+                        <li><a href="https://liferaftgroup.org/financial-assistance/"><strong>The Life Raft Group:</strong></a> Financial assistance and patient navigation services.</li>
+                    </ul>
+
+                    <h3 id="liposarcoma">Liposarcoma</h3>
+                    <ul>
+                        <li><a href="https://liposarcomafighters.org/resources/financial-assistance/"><strong>Liposarcoma Fighters:</strong></a> Lists financial resources and supportive services.</li>
+                    </ul>
+
+                    <h3 id="synovial-sarcoma">Synovial Sarcoma</h3>
+                    <ul>
+                        <li><a href="https://synovialsarcoma.org/resources/financial-assistance/"><strong>Synovial Sarcoma Foundation:</strong></a> Financial assistance for those diagnosed with synovial sarcoma.</li>
+                    </ul>
+
+                    <h3 id="angiosarcoma">Angiosarcoma</h3>
+                    <ul>
+                        <li><a href="https://angiosarcoma.org/resources/financial-resources/"><strong>Angiosarcoma Awareness:</strong></a> Financial support options for patients with angiosarcoma.</li>
+                    </ul>
+
+                    <h3 id="chondrosarcoma">Chondrosarcoma</h3>
+                    <ul>
+                        <li><a href="https://www.chondrosarcomafoundation.org/resources/financial-assistance/"><strong>Chondrosarcoma Foundation:</strong></a> Provides financial assistance for those living with chondrosarcoma.</li>
+                    </ul>
+
+                    <h3 id="epithelioid-sarcoma">Epithelioid Sarcoma</h3>
+                    <ul>
+                        <li><a href="https://epithelioidsarcoma.org/patient-resources/financial-resources/"><strong>Epithelioid Sarcoma Research Fund:</strong></a> Links to financial resources and support programs.</li>
+                    </ul>
+
+                    <h3 id="clear-cell-sarcoma">Clear Cell Sarcoma</h3>
+                    <ul>
+                        <li><a href="https://clearcellsarcoma.org/resources/"><strong>Clear Cell Sarcoma Foundation:</strong></a> Offers financial assistance and support services for CCS patients.</li>
+                    </ul>
+
+
+                    <h3 id="leukemia">Leukemia & Lymphoma</h3>
+                    <ul>
+                        <li><a href="https://www.lls.org/support-resources/financial-support"><strong>Leukemia & Lymphoma Society (LLS):</strong></a> Offers financial support for patients affected by blood cancers.</li>
+                        <li><a href="https://lymphoma.org/resources/supportservices/financialassistance/"><strong>Lymphoma Research Foundation:</strong></a> Provides support and resources for those affected by lymphoma.</li>
+                        <li><a href="https://cllsociety.org/financial-assistance/"><strong>CLL Society:</strong></a> Support for individuals with chronic lymphocytic leukemia.</li>
+                        <li><a href="https://iwmf.com/financial-assistance/"><strong>International Waldenstrom's Macroglobulinemia Foundation:</strong></a> Financial help for Waldenstrom’s patients.</li>
+                        <li><a href="https://www.clfoundation.org/financial-assistance"><strong>Cutaneous Lymphoma Foundation:</strong></a> Assistance for those facing cutaneous lymphoma.</li>
+                        <li><a href="https://allbloodcancers.org/patient-financial-assistance/"><strong>Leukemia Research Foundation:</strong></a> Financial assistance for all blood cancers.</li>
+                        <li><a href="https://lymphomahelp.org/resources/financial-assistance.html"><strong>Lymphoma Foundation of America:</strong></a> Financial aid and resources for lymphoma patients.</li>
+                        <li><a href="https://clf4kids.org/family-financial-aid/"><strong>Childhood Leukemia Foundation:</strong></a> Provides financial help for families of children with leukemia.</li>
+                    </ul>
+
+                    <h3 id="lung-cancer">Lung Cancer</h3>
+                    <ul>
+                        <li><a href="https://www.lung.org/lung-health-diseases/lung-disease-lookup/lung-cancer/resource-library/resources-support-living-with-lung-cancer"><strong>American Lung Association:</strong></a> Financial and educational resources for lung cancer patients.</li>
+                        <li><a href="https://go2foundation.org/resources-and-support/financial-help/"><strong>GO2 Foundation for Lung Cancer:</strong></a> Offers financial and logistical support services.</li>
+                        <li><a href="https://lungevity.org/for-patients-caregivers/support-services/financial-support"><strong>LUNGevity Foundation:</strong></a> Financial support for those living with lung cancer.</li>
+                        <li><a href="https://www.lungcancerresearchfoundation.org/for-patients/financial-assistance/"><strong>Lung Cancer Research Foundation:</strong></a> Offers grants and aid to patients in need.</li>
+                        <li><a href="https://www.freetobreathe.org/patient-resources/financial-assistance-programs/"><strong>Free to Breathe:</strong></a> Financial help and resources for lung cancer care.</li>
+                    </ul>
+
+                    <h3 id="colorectal-cancer">Colorectal Cancer</h3>
+                    <ul>
+                        <li><a href="https://www.ccalliance.org/patient-family-support/financial-assistance-programs"><strong>Colorectal Cancer Alliance:</strong></a> Grants and assistance for colorectal cancer patients and families.</li>
+                        <li><a href="https://colorectalcancer.org/"><strong>Colorectal Cancer Organization:</strong></a> Patient education and financial help services.</li>
+                        <li><a href="https://coloncancerfoundation.org/colorectal-cancer-financial-transportation-and-navigation-resources/"><strong>Colon Cancer Foundation:</strong></a> Provides assistance with treatment and travel costs.</li>
+                    </ul>
+
+                    <h3 id="prostate-cancer">Prostate Cancer</h3>
+                    <ul>
+                        <li><a href="https://www.pcf.org/patient-resources/patient-navigation/financial-resources/"><strong>Prostate Cancer Foundation:</strong></a> Offers resources for navigating financial challenges.</li>
+                        <li><a href="https://ustoo.org/Financial-Resources"><strong>Us TOO International:</strong></a> Financial tools and support groups for prostate cancer patients.</li>
+                        <li><a href="https://zerocancer.org/get-support/financial-resources/"><strong>ZERO – The End of Prostate Cancer:</strong></a> Financial and emotional support services.</li>
+                        <li><a href="https://malecare.org/financial-assistance/"><strong>Malecare:</strong></a> Assistance programs tailored for men with cancer.</li>
+                        <li><a href="https://pcri.org/financial-resources/"><strong>Prostate Cancer Research Institute:</strong></a> Provides guidance on financial relief for treatment expenses.</li>
+                        <li><a href="https://www.prostateconditions.org/about-prostate-conditions/financial-help"><strong>Prostate Conditions Education Council:</strong></a> Resources for individuals dealing with prostate conditions.</li>
+                    </ul>
+
+                    <h3 id="brain-tumors">Brain Tumors</h3>
+                    <ul>
+                        <li><a href="https://braintumor.org/brain-tumor-information/resources-support/financial-medical-assistance/"><strong>National Brain Tumor Society:</strong></a> Offers financial and medical support to individuals with brain tumors.</li>
+                    </ul>
+
+                    <h3>Skin Cancer / Melanoma</h3>
+                    <ul>
+                        <li><a href="https://melanoma.org/resources/patient-resources/financial-assistance/"><strong>Melanoma Research Foundation:</strong></a> Provides financial assistance to melanoma patients.</li>
+                    </ul>
+
+                    <h3 id="gynecological-cancers">Gynecological Cancers</h3>
+                    <ul>
+                        <li><a href="https://ocrahope.org/patients/financial-resources/"><strong>Ovarian Cancer Research Alliance:</strong></a> Financial support for patients and caregivers.</li>
+                        <li><a href="https://www.nccc-online.org/resources/financial-assistance/"><strong>National Cervical Cancer Coalition:</strong></a> Offers guidance and assistance for individuals with cervical cancer.</li>
+                    </ul>
+
+                    <h3>Uterine / Endometrial Cancer</h3>
+                    <ul>
+                        <li><a href="https://www.foundationforwomenscancer.org/support-resources/financial-resources/"><strong>Foundation for Women's Cancer:</strong></a> Financial help and education for gynecologic cancer patients.</li>
+                        <li><a href="https://www.facingourrisk.org/support/financial-support"><strong>FORCE: Facing Our Risk of Cancer Empowered:</strong></a> Resources for individuals facing hereditary cancers, including uterine.</li>
+                        <li><a href="https://www.nuff.org/health-resources/financial-assistance/"><strong>National Uterine Fibroids Foundation:</strong></a> Assistance for those affected by uterine fibroids.</li>
+                        <li><a href="https://ecanawomen.org/resources/financial-resources/"><strong>Endometrial Cancer Action Network for African-Americans (ECANA):</strong></a> Support and financial help for African-American women with endometrial cancer.</li>
+                        <li><a href="https://www.sgo.org/patients-caregivers-survivors/financial-resources/"><strong>Gynecologic Oncology Foundation:</strong></a> Offers financial assistance for gynecologic cancer patients.</li>
+                    </ul>
+                    <h3>Thyroid Cancer</h3>
+                    <ul>
+                        <li><a href="https://www.thyca.org/support/finance/"><strong>Thyroid Cancer Survivors' Association:</strong></a> Offers financial support to thyroid cancer patients.</li>
+                    </ul>
+
+                    <h3 id="kidney-cancer">Kidney Cancer</h3>
+                    <ul>
+                        <li><a href="https://www.kidneycancer.org/patients-caregivers/financial-resources/"><strong>Kidney Cancer Association:</strong></a> Financial resources and support services for kidney cancer patients.</li>
+                        <li><a href="https://www.kidneycancer.org/get-support/financial-assistance/"><strong>Kidney Cancer Association – Direct Link:</strong></a> Direct page for financial assistance applications.</li>
+                        <li><a href="https://www.kidneyfund.org/get-assistance"><strong>American Kidney Fund:</strong></a> Offers aid to patients with kidney disease and kidney cancer.</li>
+                    </ul>
+
+                    <h3 id="liver-cancer">Liver Cancer</h3>
+                    <ul>
+                        <li><a href="https://liverfoundation.org/for-patients/resources/financial-assistance/"><strong>American Liver Foundation:</strong></a> Financial aid and resources for liver disease and liver cancer patients.</li>
+                        <li><a href="https://www.bluefaery.org/financial-resources/"><strong>Blue Faery: The Adrienne Wilson Liver Cancer Association:</strong></a> Offers support for liver cancer patients.</li>
+                        <li><a href="https://www.globalliver.org/financial-resources"><strong>Global Liver Institute:</strong></a> Financial and care navigation support for liver cancer patients.</li>
+                        <li><a href="https://livercancernetwork.org/patient-resources/financial-assistance/"><strong>Liver Cancer Network:</strong></a> Patient-centered financial assistance and education resources.</li>
+                    </ul>
+
+                    <h3 id="multiple-myeloma">Multiple Myeloma</h3>
+                    <ul>
+                        <li><a href="https://www.myeloma.org/financial-assistance"><strong>International Myeloma Foundation:</strong></a> Offers financial support and guidance for those living with multiple myeloma.</li>
+                        <li><a href="https://themmrf.org/resources/financial-assistance/"><strong>Multiple Myeloma Research Foundation:</strong></a> Provides financial and logistical resources for myeloma patients.</li>
+                        <li><a href="https://www.myelomacrowd.org/financial-resources/"><strong>Myeloma Crowd Foundation:</strong></a> Connects patients with funding support and grants for treatment and related costs.</li>
+                    </ul>
+
+                    <h3 id="blood-disorders">Blood Disorders & Bone Marrow Transplant</h3>
+                    <ul>
+                        <li><a href="https://www.aamds.org/support/financial-resources"><strong>Aplastic Anemia & MDS International Foundation:</strong></a> Assistance for patients with aplastic anemia, MDS, and related conditions.</li>
+                        <li><a href="https://bonemarrow.org/financial-assistance/"><strong>Bone Marrow & Cancer Foundation:</strong></a> Offers financial assistance to patients undergoing bone marrow transplants.</li>
+                        <li><a href="https://www.bmtinfonet.org/financial-assistance"><strong>BMT InfoNet:</strong></a> Provides guidance and funding options for bone marrow and stem cell transplant patients.</li>
+                        <li><a href="https://nbmtlink.org/resources/financial-assistance/"><strong>National Bone Marrow Transplant Link:</strong></a> Resources and financial support for individuals and families undergoing transplants.</li>
+                    </ul>
+                    <h3 id="bladder-cancer">Bladder Cancer</h3>
+                    <ul>
+                        <li><a href="https://bcan.org/financial-resources/"><strong>Bladder Cancer Advocacy Network:</strong></a> Offers financial resource navigation and support for individuals living with bladder cancer.</li>
+                    </ul>
+
+                    <h3 id="digestive-cancers">Digestive System Cancers</h3>
+                    <ul>
+                        <li><a href="https://ecan.org/patient-resources/financial-assistance/"><strong>Esophageal Cancer Action Network:</strong></a> Offers financial assistance and support for those diagnosed with esophageal cancer.</li>
+                        <li><a href="https://cholangiocarcinoma.org/resources/financial-resources/"><strong>Cholangiocarcinoma Foundation:</strong></a> Provides financial resources for patients with bile duct cancer.</li>
+                        <li><a href="https://www.caringforcarcinoid.org/patients/financial-assistance/"><strong>Caring for Carcinoid Foundation:</strong></a> Offers financial support to individuals living with neuroendocrine and carcinoid tumors.</li>
+                    </ul>
+
+                    <h3 id="testicular-cancer">Testicular Cancer</h3>
+                    <ul>
+                        <li><a href="https://testicularcancersociety.org/support-for-fighters/financial-assistance/"><strong>Testicular Cancer Society:</strong></a> Provides financial and emotional support to men diagnosed with testicular cancer.</li>
+                    </ul>
+
+                    <h3 id="rare-cancers">Rare Cancers</h3>
+                    <ul>
+                        <li><a href="https://www.chordomafoundation.org/financial-assistance/"><strong>Chordoma Foundation:</strong></a> Offers financial assistance and guidance to patients with chordoma.</li>
+                        <li><a href="https://www.mpnresearchfoundation.org/resources-for-patients/financial-assistance/"><strong>MPN Research Foundation:</strong></a> Resources for individuals with myeloproliferative neoplasms seeking financial help.</li>
+                        <li><a href="https://www.aamds.org/support/financial-resources"><strong>Aplastic Anemia & MDS International Foundation:</strong></a> Offers support and funding for patients with bone marrow disorders.</li>
+                    </ul>
+
+                    <h3 id="pediatric-cancer">Pediatric Cancer</h3>
+                    <ul>
+                        <li><a href="https://nationalpcf.org/resources/financial-assistance/"><strong>National Pediatric Cancer Foundation:</strong></a> Provides financial support resources for families affected by pediatric cancer.</li>
+                    </ul>
+
+                    <h3 id="multi-cancer">Multi-Cancer Support Organizations</h3>
+                    <ul>
+                        <li><a href="https://www.patientadvocate.org/connect-with-services/financial-aid-funds/"><strong>Patient Advocate Foundation:</strong></a> Offers financial aid funds and navigation support. Phone: 1-800-532-5274</li>
+                        <li><a href="https://www.cancercarecopay.org/"><strong>Cancer Care Co-Payment Assistance Foundation:</strong></a> Provides co-payment assistance for cancer medications and treatments.</li>
+                        <li><a href="https://www.thesamfund.org/get-help/"><strong>The SAMFund for Young Adult Survivors of Cancer:</strong></a> Financial aid program for young adult cancer survivors.</li>
+                        <li><a href="https://patientresource.com"><strong>Patient Resource:</strong></a> Lists and links to financial assistance organizations for cancer patients.</li>
+                        <li><a href="https://www.healthwellfoundation.org/"><strong>HealthWell Foundation:</strong></a> Offers financial support for underinsured patients with chronic illnesses, including cancer.</li>
+                    </ul>
+                </section>
+
+                <section id="ostomy-resources" class="resource-section">
+                    <h2>Ostomy Supplies &amp; Support</h2>
+                    <ul>
+                        <li><a href="https://meplus.convatec.com/articles/patient-assistance-program/"><strong>ConvaTec Patient Assistance Program:</strong></a> Phone: 800-422-8811. Provides supplies for 90 days (one time per year) to financially eligible patients.</li>
+                        <li><a href="https://www.hollister.com/en/ostomycare/ostomylearningcenter/usingostomyproducts/navigating-insurance-coverage-for-your-ostomy-products"><strong>Hollister Patient Assistance Program:</strong></a> Phone: 800-323-4060. Offers 3 months worth of supplies through their Patient Assistance Program.</li>
+                        <li><a href="https://www.coloplast.us/"><strong>Coloplast Patient Assistance (C.P.A.):</strong></a> Phone: 877-781-2656. Provides 3 months worth of supplies for uninsured/underinsured individuals.</li>
+                        <li><a href="https://www.kindredbox.org/"><strong>Kindred Box:</strong></a> Provides donated ostomy supplies to uninsured and underinsured ostomates in the US.</li>
+                        <li><a href="https://www.fowusa.org/"><strong>Friends of Ostomates Worldwide:</strong></a> Phone: 502-909-6669. Provides supplies at no cost to ostomates in need.</li>
+                        <li><a href="https://www.ostogroup.org/"><strong>Osto Group:</strong></a> Phone: 877-678-6690 or 561-203-5886. Supplies for uninsured/underinsured individuals (pay shipping).</li>
+                        <li><a href="https://www.facebook.com/OstomyAngelPantry/"><strong>Ostomy Angel's Pantry:</strong></a> Facebook page offering donated supplies for the cost of shipping.</li>
+                        <li><a href="mailto:kinderscloset@yahoo.com"><strong>Kinder's Closet Ostomy Pantry:</strong></a> Email: kinderscloset@yahoo.com or kinderscloset2020@gmail.com. Provides short-term supplies.</li>
+                        <li><a href="https://ostomysupplies.ostomy211.org/"><strong>Ostomy 211:</strong></a> Emergency supply pantry with donation requested to cover expenses.</li>
+                        <li><a href="mailto:lewolf1815@aol.com"><strong>Weston Florida Ostomy and Tubefeeding Group:</strong></a> Contact: Lynn Wolfson. Phone: 954-562-7417. Offers supplies for cost of shipping and handling.</li>
+                        <li><a href="https://bestbuyostomysupplies.com/"><strong>Best Buy Ostomy Supplies:</strong></a> Phone: 866-940-4555. Low-cost supply options.</li>
+                        <li><a href="https://www.lifelinemedical.org/"><strong>Lifeline Medical Supply:</strong></a> Low-cost supply options.</li>
+                        <li><a href="https://www.medicalmonks.com/"><strong>Medical Monks:</strong></a> Phone: 844-859-9400. Low-cost supply options.</li>
+                        <li><a href="https://www.ostomy4less.com/"><strong>Ostomy4less:</strong></a> Phone: 877-678-6694. Email: patti@ostomymcp.com. Low-cost supply options.</li>
+                        <li><a href="https://petesmedical.com/"><strong>Pete's Medical:</strong></a> Phone: 720-988-0982. Email: info@petesmedical.com. Low-cost supply options.</li>
+                        <li><a href="https://www.personallydelivered.com/"><strong>Personally Delivered:</strong></a> Phone: 855-445-8609. Low-cost supply options.</li>
+                        <li><a href="https://www.stomabags.com/"><strong>Stomabags:</strong></a> Phone: 855-828-1444. Low-cost supply options.</li>
+                        <li><a href="https://www.vitalitymedical.com/"><strong>Vitality Medical Supplies:</strong></a> Phone: 800-397-5899. Low-cost supply options.</li>
+                        <li><a href="https://www.needymeds.org"><strong>NeedyMeds:</strong></a> Phone: 800-503-6897. Helps locate assistance programs.</li>
+                        <li><a href="https://www.cancercare.org/helpinghand"><strong>CancerCare's A Helping Hand:</strong></a> Phone: 800-813-HOPE (4673). Searchable database of financial assistance for cancer patients.</li>
+                        <li><a href="https://www.crohnscolitisfoundation.org/"><strong>Crohn's &amp; Colitis Foundation Ostomy Patient Assistance:</strong></a> Provides support for ostomy patients with inflammatory bowel disease.</li>
+                        <li><a href="https://www.cms.hhs.gov"><strong>Centers for Medicare &amp; Medicaid Services (CMS):</strong></a> Phone: 800-633-4227, TTY: 877-486-2048. Ostomy care and supplies covered under Medicare Part B.</li>
+                        <li><a href="https://www.ccalliance.org/colorectal-cancer-information/ostomy"><strong>Colorectal Cancer Alliance - Colostomies and Ileostomies:</strong></a> Phone: 877-422-2030. Information about procedures for colorectal cancer patients.</li>
+                        <li><a href="https://www.ccalliance.org/colorectal-cancer-information/ostomy/nutrition"><strong>Colorectal Cancer Alliance - Nutrition with an Ostomy:</strong></a> Phone: 877-422-2030. Guide to nutrition and eating with an ostomy.</li>
+                        <li><a href="https://www.ccalliance.org/colorectal-cancer-information/ostomy/video-library"><strong>Colorectal Cancer Alliance - Ostomy Video Library:</strong></a> Videos on ostomy care and accessories.</li>
+                        <li><a href="https://www.ccalliance.org/about/events"><strong>Colorectal Cancer Alliance - Ostomy Video Support Group:</strong></a> First Wednesdays 7:30pm-8:30pm ET. Monthly moderated video meetings for ostomy support.</li>
+                        <li><a href="https://www.ostomy101.com/ostomy-supply-basics"><strong>Ostomy 101:</strong></a> Resources for ostomy basics.</li>
+                        <li><a href="https://www.ostomy.org"><strong>United Ostomy Associations of America (UOAA):</strong></a> Phone: 800-826-0826. Promotes quality of life through support and advocacy.</li>
+                        <li><a href="https://www.ostomy.org/where-should-i-purchase-my-ostomy-products/"><strong>UOAA - Purchasing Ostomy Products:</strong></a> Guides on where to purchase supplies.</li>
+                        <li><a href="https://www.ostomy.org/emergency-supplies/"><strong>UOAA - Emergency Supplies:</strong></a> Resources for emergency ostomy supplies.</li>
+                        <li><a href="https://www.ostomyinternational.org"><strong>International Ostomy Association (IOA):</strong></a> Advocates for ostomate rights worldwide.</li>
+                        <li><a href="http://globaltrach.org"><strong>Global Tracheostomy Collaborative:</strong></a> Patient and family resources for tracheostomy and ostomy care.</li>
+                        <li><a href="https://www.wocn.org"><strong>Wound, Ostomy, and Continence Nurses Society:</strong></a> Phone: 888-224-9626. Professional organization to find WOC nurses.</li>
+                    </ul>
+                </section>
+
+                <section id="medical-supplies" class="resource-section">
+                    <h2>Medical Supplies &amp; Equipment</h2>
+                    <ul>
+                        <li><a href="https://www.cancer.org/tlc"><strong>American Cancer Society TLC Program:</strong></a> (800) 850-9445. Affordable wig and hat assistance beginning 7/24.</li>
+                        <li><a href="https://www.binsonse.com/"><strong>Binson’s Medical Equipment:</strong></a> Hernia supplies and durable medical equipment.</li>
+                        <li><a href="https://www.biobidet.com/"><strong>BioBidet:</strong></a> (847) 458-2334. Bidet toilets, seats, and attachments; coupons available.</li>
+                        <li><a href="https://depend.com/"><strong>Depend Incontinence Products:</strong></a> (877) 413-3736. Manufacturer coupons for Depend products.</li>
+                        <li><a href="https://goodhealthwill.org/"><strong>Good Health Will:</strong></a> (970) 624-6002. Low-cost medical equipment and state-specific resources.</li>
+                        <li><a href="https://hero.care/"><strong>Healthcare Equipment Recycling Organization – HERO Fargo:</strong></a> 701-212-1921. Affordable medical equipment &amp; supplies.</li>
+                        <li><a href="https://diaperbanknetwork.org/"><strong>National Diaper Bank Network:</strong></a> Find local diaper banks that may provide incontinence supplies.</li>
+                        <li><a href="https://www.pfizer.com/patient/pathways"><strong>Pfizer – Rx Pathways:</strong></a> (800) 879-3477. Financial assistance for silver sulfadiazine cream for radiation burns.</li>
+                        <li><a href="https://www.simonfoundationforcontinence.org/"><strong>Simon Foundation for Continence:</strong></a> Directory of diaper banks across the U.S.</li>
+                    </ul>
+                </section>
+
+                <section id="wig-resources" class="resource-section">
+                    <h2>Wigs &amp; Headcoverings</h2>
+                    <ul>
+                        <li><a href="https://www.chemocare.com/"><strong>Chemocare.com®:</strong></a> (844) 268-3901. Info on chemotherapy medications, nutrition, side-effect management, and self-care tips.</li>
+                        <li><a href="https://chemocessories.org/"><strong>Chemocessories:</strong></a> Free accessory sets (scarves, turbans, jewelry) for women in cancer treatment.</li>
+                        <li><a href="https://www.ebeautyresourcecenter.com/"><strong>EBeauty Resource Center:</strong></a> Free wig exchange program to restore confidence during treatment.</li>
+                        <li><a href="https://www.hairweshare.org/"><strong>Hair We Share:</strong></a> (516) 484-8483. Free wigs for children under 18 with medical hair loss; donations accepted.</li>
+                        <li><a href="https://www.heavenlyhats.org/"><strong>Heavenly Hats:</strong></a> (920) 362-2668. New hats for patients who lose hair to disease or treatment.</li>
+                        <li><a href="https://hopescarves.org/"><strong>Hope Scarves:</strong></a> (502) 333-9715. Free headscarves paired with survivor stories for encouragement.</li>
+                        <li><a href="https://knotsoflove.org/"><strong>Knots of Love:</strong></a> (949) 933-7000. Hand-knit beanies delivered to chemotherapy centers nationwide.</li>
+                        <li><a href="https://locksoflove.org/"><strong>Locks of Love:</strong></a> (561) 833-7332. Hair prosthetics for children and young adults up to age 21.</li>
+                        <li><a href="https://lookgoodfeelbetter.org/"><strong>Look Good Feel Better:</strong></a> Workshops and “Program Finder” for beauty techniques during treatment.</li>
+                        <li><a href="https://lookgoodfeelbetter.org/teens"><strong>Look Good Feel Better for Teens:</strong></a> (800) 395-LOOK. Materials and workshops for 13–17 year-olds facing treatment side effects.</li>
+                        <li><a href="https://wigsandwishes.org/"><strong>Wigs &amp; Wishes:</strong></a> (856) 582-6600. Free wigs, styling services, and wishes for pediatric and adult patients.</li>
+                    </ul>
+                </section>
+
+                <section id="insurance-assistance" class="resource-section">
+                    <h2>Insurance &amp; Health Coverage</h2>
+                    <ul>
+                        <li><a href="https://www.aflac.com/"><strong>Aflac Cancer Insurance:</strong></a> Helps patients and families cope financially and emotionally after a cancer diagnosis.</li>
+                        <li><a href="https://www.cms.gov/CCIIO"><strong>Consumer Assistance Programs (CAPs):</strong></a> State-based help for insurance problems and coverage options.</li>
+                        <li><a href="https://findahealthcenter.hrsa.gov/"><strong>HRSA Health Center Finder:</strong></a> Find federally-funded clinics offering comprehensive primary care on a sliding scale.</li>
+                        <li><a href="https://www.healthcare.gov/"><strong>Healthcare.gov:</strong></a> (800) 318-2596. Marketplace for health insurance; learn about Medicaid eligibility and subsidies.</li>
+                        <li><a href="https://www.cms.gov/marketplace"><strong>Health Insurance Marketplace (CMS):</strong></a> Application assistance, technical support, and benefits explanations.</li>
+                        <li><a href="https://www.medicaid.gov/"><strong>Medicaid:</strong></a> Income-based government health insurance; may supplement Medicare in some states.</li>
+                        <li><a href="https://www.healthcare.gov/find-assistance/"><strong>Find Local Help:</strong></a> (800) 318-2596. Locate agents, brokers, and navigators for enrollment assistance.</li>
+                        <li><a href="https://bphc.hrsa.gov/qualityimprovement/clinicalquality/implementing/medicareinteractive.html"><strong>Medicare Interactive:</strong></a> Answers to questions about Medicare benefits, rights, and options.</li>
+                        <li><a href="https://www.medicarerights.org/"><strong>Medicare Rights Center:</strong></a> (800) 333-4114. Advocacy and assistance for Medicare beneficiaries.</li>
+                        <li><a href="https://www.mutualofomaha.com/"><strong>Mutual of Omaha:</strong></a> (800) 775-6000. Lump-sum cancer insurance benefits of $10K–$100K, tax-free.</li>
+                        <li><a href="https://www.patientaccessnetworkfoundation.org/"><strong>Patient Access Network (PAN) Foundation:</strong></a> (800) 722-1213. Low-Income Subsidy for Medicare drug plan costs.</li>
+                        <li><a href="https://www.patientadvocate.org/colorectal-care-line/"><strong>Patient Advocate Foundation – Colorectal Care Line:</strong></a> (866) 657-8634. Free case management and national financial directory.</li>
+                        <li><a href="https://www.shiptacenter.org/"><strong>State Health Insurance Assistance Programs (SHIP):</strong></a> Free counseling and education for Medicare-eligible individuals.</li>
+                        <li><a href="https://stridehealth.com/"><strong>Stride Health:</strong></a> Online insurance broker for independent workers; no consumer fees, coverage for non-US citizens.</li>
+                        <li><a href="https://triagecancer.org/topic/insurance"><strong>Triage Cancer – Health Insurance:</strong></a> (424) 258-4628. Guides on appeals, selecting plans, and state insurance laws.</li>
+                    </ul>
+                </section>
+
+                <section id="tech-resources" class="resource-section">
+                    <h2>Phone, Internet, &amp; Technology</h2>
+                    <ul>
+                        <li><a href="https://www.assurancewireless.com/"><strong>Assurance Wireless:</strong></a> (888) 321-5880. Provides a free cell phone plus free minutes, if eligible.</li>
+                        <li><a href="https://www.fcc.gov/broadbandbenefit"><strong>Emergency Broadband Benefit:</strong></a> Federal Communications Commission program to help households struggling to afford internet service.</li>
+                        <li><a href="https://www.fcc.gov/general/lifeline-program-low-income-consumers"><strong>Lifeline:</strong></a> Federal program that lowers the monthly cost of phone or internet service.</li>
+                        <li><a href="https://powerfulpatients.org/digitally-empowered/"><strong>Patient Empowerment Network:</strong></a> (833) 213-6657. Helps you become more tech-savvy so you can find information and support during your cancer journey.</li>
+                        <li><a href="https://www.safelinkwireless.com/"><strong>SafeLink Wireless:</strong></a> (800) 723-3546. Provides a free cell phone to low-income households.</li>
+                    </ul>
+                </section>
+
+                <section id="support-chats" class="resource-section">
+                    <h2>Support Group Chats</h2>
+                    <ul>
+                        <li><a href="https://www.ccalliance.org/patient-family-support/patient-family-support-group-chat"><strong>Colorectal Cancer Alliance – Support Group Chats:</strong></a> (877) 422-2030. Wednesdays 7pm–8pm ET; Mon–Fri noon–1pm ET moderated chats and a special grief chat on Wednesdays.</li>
+                        <li><a href="https://www.cancer.org/support-programs and-services/online-communities.html"><strong>American Cancer Society – Cancer Survivors Network:</strong></a> 24/7 online community with discussion boards, chat rooms, and private messaging for all cancer types.</li>
+                        <li><a href="https://www.lls.org/support-resources/online-chats"><strong>Leukemia & Lymphoma Society – Online Chats:</strong></a> (800) 955-4572. Weekly moderated online chats for patients, survivors and caregivers affected by blood cancers.</li>
+                        <li><a href="https://www.komen.org/support-resources/support/support-groups/"><strong>Susan G. Komen – Breast Cancer Support:</strong></a> (877) 465-6636. Offers resources to find local and online support groups specifically for breast cancer patients and survivors.</li>
+                        <li><a href="https://zerocancer.org/get-support/"><strong>ZERO – Prostate Cancer Support:</strong></a> (844) 244-1309. Offers virtual support groups, one-on-one patient matching, and online communities for prostate cancer patients.</li>
+                        <li><a href="https://www.cancercare.org/support_groups/"><strong>CancerCare – Online Support Groups:</strong></a> (800) 813-4673. Professional oncology social worker-led groups for various cancer types including breast, lung, colorectal, and blood cancers.</li>
+                        <li><a href="https://www.cancersupportcommunity.org/mylifeline-online-community"><strong>Cancer Support Community – MyLifeLine:</strong></a> (888) 793-9355. 24/7 discussion forums moderated by licensed mental health professionals for all cancer types.</li>
+                        <li><a href="https://www.lungevity.org/for-patients-caregivers/support-services/online-communities"><strong>LUNGevity Foundation – Online Communities:</strong></a> (844) 360-5864. Largest online lung cancer support network with discussion boards and Facebook groups for specific lung cancer types.</li>
+                        <li><a href="https://www.healthfulchat.org/cancer-chat-room.html"><strong>HealthfulChat – Cancer Chat Room:</strong></a> Peer-to-peer cancer support with chat rooms and forums for all cancer types, available 24/7.</li>
+                        <li><a href="https://community.breastcancer.org/"><strong>BreastCancer.org – Community & Forums:</strong></a> Active discussion boards with over 200,000 members for breast cancer patients and survivors.</li>
+                        <li><a href="https://imermanangels.org/"><strong>Imerman Angels:</strong></a> (866) 463-7626. One-on-one cancer support through personalized matches with mentors who have experienced the same type of cancer.</li>
+                        <li><a href="https://www.cancerhopenetwork.org/"><strong>Cancer Hope Network:</strong></a> (877) 467-3638. Matches cancer patients and caregivers with trained volunteer survivors for one-on-one support.</li>
+                        <li><a href="https://www.cancerresearchuk.org/welcome-to-cancer-chat"><strong>Cancer Research UK – Cancer Chat:</strong></a> Fully moderated forum available 24/7 for cancer patients worldwide.</li>
+                        <li><a href="https://www.youngsurvival.org/connect"><strong>Young Survival Coalition:</strong></a> (877) 972-1011. Online support groups and forums specifically for young women with breast cancer.</li>
+                        <li><a href="https://www.acor.org/"><strong>ACOR (Association of Cancer Online Resources):</strong></a> Email-based support groups/listservs for over 100 different cancer types.</li>
+                        <li><a href="https://cancergrace.org/forum"><strong>Cancer GRACE:</strong></a> Online forum focused on providing support and education for lung, pancreatic, and colorectal cancers.</li>
+                        <li><a href="https://www.inspire.com/groups/ovarian-cancer-national-alliance/"><strong>Inspire – Ovarian Cancer Community:</strong></a> Online support community partnered with the Ovarian Cancer Research Alliance.</li>
+                        <li><a href="https://thyca.org/sg/"><strong>ThyCa (Thyroid Cancer Survivors' Association):</strong></a> (877) 588-7904. Support groups, one-to-one support, and online forums for thyroid cancer patients.</li>
+                        <li><a href="https://www.pbtfus.org/virtual-connect/"><strong>Pediatric Brain Tumor Foundation – Virtual Connect:</strong></a> (800) 253-6530. Online support groups and resources for families of children with brain tumors.</li>
+                        <li><a href="https://www.kidneycan.org/connections/"><strong>Kidney Cancer Association – Patient & Caregiver Connect:</strong></a> (800) 850-9132. Peer-to-peer support program and online communities for kidney cancer patients.</li>
+                    </ul>
+                </section>
+
+                <section id="bereavement-support" class="resource-section">
+                    <h2>Bereavement &amp; Grief Support</h2>
+                    <ul>
+                        <li><a href="https://www.centerforloss.com/"><strong>Center for Loss &amp; Life Transition:</strong></a> (970) 226-6050. Dedicated to helping people who are grieving and those who care for them.</li>
+                        <li><a href="https://my.clevelandclinic.org/patients/information/bereavement/support-groups"><strong>Cleveland Clinic Hospice Bereavement Support Groups:</strong></a> 216-444-9819 (Questions &amp; Support: 844-20-GRIEF). Free monthly online and in-person groups for all types of loss.</li>
+                        <li><a href="https://www.griefhealingdiscussiongroups.com/"><strong>Grief Healing Discussion Groups:</strong></a> Online forums and moderated discussion groups for anyone grieving.</li>
+                        <li><a href="https://nacg.org/"><strong>National Alliance for Children’s Grief:</strong></a> (866) 432-1542. Grief support services for children, teens, and their families.</li>
+                        <li><a href="https://www.nationalwidowers.org/"><strong>National Widowers’ Organization:</strong></a> (800) 309-3658. Virtual toolkit and peer support for men coping with loss.</li>
+                        <li><a href="https://whatsyourgrief.com/"><strong>What’s Your Grief:</strong></a> Articles, courses, and community for anyone wishing to understand life after loss.</li>
+                        <li><a href="https://widowedparent.org/"><strong>Widowed Parent:</strong></a> Support for mothers and fathers who have lost a spouse/partner and are raising children alone.</li>
+                        <li><a href="https://www.wingsforwidows.org/"><strong>Wings for Widows:</strong></a> (888) 946-4749. Free coaching and education to navigate the financial trauma of widowhood.</li>
+                    </ul>
+                </section>
+
+                <section id="vision-resources" class="resource-section">
+                    <h2>Vision Resources</h2>
+                    <h3>Vision Care Assistance</h3>
+                    <ul>
+                        <li><a href="https://aao.org/eyecare-america" target="_blank"><strong>EyeCare America – American Academy of Ophthalmology:</strong></a> Provides eye exams and care through volunteer ophthalmologists, often at no cost to eligible individuals. <a href="https://secure.aao.org/forms/ecareferral" target="_blank">Check eligibility here.</a></li>
+
+                        <li><a href="https://www.americanglaucomasociety.net/patient-family-resources/ags-cares" target="_blank"><strong>AGS Cares – American Glaucoma Society:</strong></a> Offers free surgical glaucoma care for uninsured individuals who qualify.</li>
+
+                        <li><a href="https://enroll.tafcares.org" target="_blank"><strong>The Assistance Fund:</strong></a> Helps underinsured individuals pay for treatments related to vision conditions including inherited retinal disease, thyroid eye disease, and uveitis.</li>
+
+                        <li><a href="https://opted.org" target="_blank"><strong>Association of Schools and Colleges of Optometry:</strong></a> Many optometry schools offer low-cost or free eye care through student-run clinics and research participation.</li>
+
+                        <li><a href="https://eyewant2know.com" target="_blank"><strong>Eye Want 2 Know – Spark Therapeutics:</strong></a> Offers free genetic testing and counseling for individuals with inherited retinal diseases (IRD).</li>
+
+                        <li><a href="https://www.fightingblindness.org/open-access-genetic-testing-program" target="_blank"><strong>My Retina Tracker Program – Foundation Fighting Blindness:</strong></a> Provides free high-coverage genetic testing and counseling for individuals with IRD.</li>
+
+                        <li><a href="https://mygooddays.org" target="_blank"><strong>Good Days:</strong></a> Offers financial support for high co-pays related to serious eye conditions.</li>
+
+                        <li><a href="https://healthwellfoundation.org" target="_blank"><strong>HealthWell Foundation:</strong></a> Offers financial assistance with insurance co-pays, premiums, and deductibles for some vision-related conditions.</li>
+
+                        <li><a href="https://www.hrsa.gov/get-health-care/affordable/hill-burton" target="_blank"><strong>Hill-Burton Program:</strong></a> Participating hospitals provide free or low-cost medical care—including vision services—to eligible individuals based on income.</li>
+
+                        <li><a href="https://vspglobal.com/cms/vspglobal-outreach/gift-certificates.html" target="_blank"><strong>VSP Eyes of Hope:</strong></a> Offers no-cost eye exams and glasses to uninsured individuals with limited income through community partners.</li>
+
+                        <li><a href="https://www.lionsclubs.org/en/resources-for-members/resource-center/eyeglass-recycling" target="_blank"><strong>Lions Clubs International:</strong></a> Local clubs may offer assistance with eye care and provide free eyeglasses. <a href="https://www.lionsclubs.org/en/start-our-approach/club-locator" target="_blank">Find a local club.</a></li>
+
+                        <li><a href="https://new-eyes.org/" target="_blank"><strong>New Eyes:</strong></a> Provides free prescription eyeglasses to low-income individuals. Applications typically submitted by social workers or health agencies.</li>
+
+                        <li><a href="https://www.missioncataractusa.org/" target="_blank"><strong>Mission Cataract USA:</strong></a> Offers free cataract surgery to eligible individuals of all ages who cannot afford care.</li>
+
+                        <li><a href="https://americasight.org/" target="_blank"><strong>Operation Sight:</strong></a> Provides free cataract surgery to qualifying low-income patients.</li>
+
+                        <li><a href="https://nfb.org/programs-services/free-white-cane-program" target="_blank"><strong>National Federation of the Blind – Free White Cane Program:</strong></a> Offers free white canes for personal use to individuals who are blind or visually impaired.</li>
+
+                        <li><a href="https://preventblindness.org/" target="_blank"><strong>Prevent Blindness:</strong></a> National nonprofit with resources, educational materials, and referrals to local eye care programs.</li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Providing a centralized directory of resources for cancer patients and their families.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#national-resources">National Resources</a></li>
+                    <li><a href="#cancer-resources">Cancer Resources</a></li>
+                    <li><a href="#financial">Financial Assistance</a></li>
+                    <li><a href="#mental-health">Mental Health</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; <span id="currentYear"></span> Community Resource Directory. All rights reserved.
+        </div>
+    </footer>
+
+    <div class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // JavaScript for search functionality
+        function performSearch() {
+            const query = document.getElementById("siteSearch").value.toLowerCase();
+            const sections = document.querySelectorAll('.resource-section');
+            let resultsHtml = '';
+            let found = false;
+
+            sections.forEach(section => {
+                const sectionTitle = section.querySelector('h2').textContent.toLowerCase();
+                // Check section title
+                if (sectionTitle.includes(query)) {
+                    resultsHtml += `<p><a href="#${section.id}">${section.querySelector('h2').textContent}</a></p>`;
+                    found = true;
+                }
+                // Check subheadings
+                const subheadings = section.querySelectorAll('h3');
+                subheadings.forEach(subheading => {
+                    const subheadingText = subheading.textContent.toLowerCase();
+                    if (subheadingText.includes(query)) {
+                        resultsHtml += `<p><a href="#${subheading.id}">${subheading.textContent}</a> in ${section.querySelector('h2').textContent}</p>`;
+                        found = true;
+                    }
+                });
+                // Check list items
+                const listItems = section.querySelectorAll('li');
+                listItems.forEach(item => {
+                    const itemText = item.textContent.toLowerCase();
+                    if (itemText.includes(query)) {
+                        // Find the closest subheading or section title for context
+                        let context = '';
+                        const closestHeading = item.closest('section').querySelector('h3') || item.closest('section').querySelector('h2');
+                        if (closestHeading) {
+                            context = ` in ${closestHeading.textContent}`;
+                        }
+                        // Link directly to the resource if it has an anchor or link within the LI, otherwise just show the text.
+                        const itemLink = item.querySelector('a');
+                        if (itemLink && itemLink.href) {
+                            resultsHtml += `<p><a href="${itemLink.href}">${item.textContent}</a>${context}</p>`;
+                        } else {
+                            resultsHtml += `<p>${item.textContent}${context}</p>`;
+                        }
+                        found = true;
+                    }
+                });
+            });
+
+            const searchResultsDiv = document.getElementById("searchResults");
+            if (found) {
+                searchResultsDiv.innerHTML = `<h3>Search Results for "${query}"</h3>` + resultsHtml;
+            } else {
+                searchResultsDiv.innerHTML = `<p>No results found for "${query}".</p>`;
+            }
+        }
+
+        // Back to Top Button functionality
+        const backToTopButton = document.querySelector(".back-to-top");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 100) {
+                backToTopButton.classList.add("show");
+            } else {
+                backToTopButton.classList.remove("show");
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Optional: Add accordion functionality for mobile if needed
+        // You would uncomment and adapt this if you want to implement the accordion styles
+        // const accordions = document.querySelectorAll(".accordion");
+        // accordions.forEach(accordion => {
+        //     accordion.addEventListener("click", function() {
+        //         this.classList.toggle("active");
+        //         const panel = this.nextElementSibling;
+        //         if (panel.style.maxHeight) {
+        //             panel.style.maxHeight = null;
+        //         } else {
+        //             panel.style.maxHeight = panel.scrollHeight + "px";
+        //         }
+        //     });
+        // });
+    </script>
+</body>
+</html>
